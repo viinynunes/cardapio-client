@@ -1,17 +1,16 @@
-import 'package:flutter/material.dart';
-import '../../modules/week_menu/domain/entities/menu_item.dart' as item;
+import '../../modules/week_menu/domain/entities/item_menu.dart' as item;
 
 class MenuCartController {
-  List<item.MenuItem> menuItemCartList = [];
+  List<item.ItemMenu> menuItemCartList = [];
 
-  removeMenuItem(item.MenuItem item){
+  removeMenuItem(item.ItemMenu item){
     menuItemCartList.remove(item);
   }
 
   Future getList() async {
     for (int i = 1; i <= 10; i++) {
       menuItemCartList.add(
-        item.MenuItem(
+        item.ItemMenu(
             'Arroz com Feijão e Batata Frita $i',
             'comida feita com o ingrediente de numero ${i * 35}, recheado com o molho de numero ${i * 17} e também temperado com ervas número ${i * 23}',
             'https://portal.fgv.br/sites/portal.fgv.br/files/'

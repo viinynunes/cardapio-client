@@ -1,8 +1,8 @@
-import 'package:cardapio/modules/week_menu/domain/entities/menu_item.dart';
+import 'package:cardapio/modules/week_menu/domain/entities/item_menu.dart';
 
 class WeekMenuDayController {
 
-  MenuItem menuItem;
+  ItemMenu menuItem;
 
   WeekMenuDayController(this.menuItem);
 

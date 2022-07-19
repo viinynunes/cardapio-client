@@ -1,13 +1,13 @@
 import 'package:cardapio/android/order/menu_cart.dart';
 import 'package:flutter/material.dart';
 
-import '../../modules/week_menu/domain/entities/menu_item.dart' as menu;
+import '../../modules/week_menu/domain/entities/item_menu.dart' as menu;
 import '../controllers/week_menu_day_controller.dart';
 
 class WeekMenuDayItem extends StatelessWidget {
   const WeekMenuDayItem({Key? key, required this.menuItem}) : super(key: key);
 
-  final menu.MenuItem menuItem;
+  final menu.ItemMenu menuItem;
 
   @override
   Widget build(BuildContext context) {

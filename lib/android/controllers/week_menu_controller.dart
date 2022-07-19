@@ -1,12 +1,12 @@
-import '../../modules/week_menu/domain/entities/menu_item.dart';
+import '../../modules/week_menu/domain/entities/item_menu.dart';
 
 class WeekMenuController {
-  List<MenuItem> menuList = [];
+  List<ItemMenu> menuList = [];
 
   Future getList() async {
     for (int i = 1; i <= 100; i++) {
       menuList.add(
-        MenuItem(
+        ItemMenu(
             'Arroz com Feijão e Batata Frita $i',
             'comida feita com o ingrediente de numero ${i * 35}, recheado com o molho de numero ${i * 17} e também temperado com ervas número ${i * 23}',
             'https://portal.fgv.br/sites/portal.fgv.br/files/'
