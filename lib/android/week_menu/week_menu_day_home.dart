@@ -1,52 +1,29 @@
-import 'package:cardapio/android/controllers/week_menu_controller.dart';
+import 'package:cardapio/android/controllers/i_week_menu_controller.dart';
 import 'package:cardapio/android/week_menu/week_menu_day_item.dart';
+import 'package:cardapio/modules/week_menu/domain/entities/item_menu.dart';
 import 'package:flutter/material.dart';
 
 class WeekMenuDayHome extends StatefulWidget {
-  const WeekMenuDayHome({Key? key}) : super(key: key);
+  const WeekMenuDayHome({Key? key, required this.controller}) : super(key: key);
+
+  final IWeekMenuController controller;
 
   @override
   State<WeekMenuDayHome> createState() => _WeekMenuDayHomeState();
 }
 
 class _WeekMenuDayHomeState extends State<WeekMenuDayHome> {
-  final controller = WeekMenuController();
+  late List<ItemMenu> menuItemList;
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
-    controller.getList();
+    menuItemList = await widget.controller.getItemMenuList();
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
-    String getWeekDay(){
-      if(DateTime.now().weekday == 1){
-        return 'Segunda-Feira';
-      }
-      if(DateTime.now().weekday == 2){
-        return 'Terça-Feira';
-      }
-      if(DateTime.now().weekday == 3){
-        return 'Quarta-Feira';
-      }
-      if(DateTime.now().weekday == 4){
-        return 'Quinta-Feira';
-      }
-      if(DateTime.now().weekday == 5){
-        return 'Sexta-Feira';
-      }
-      if(DateTime.now().weekday == 6){
-        return 'Sábado';
-      }
-      if(DateTime.now().weekday == 7){
-        return 'Domingo';
-      }
-
-      return '';
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -54,19 +31,18 @@ class _WeekMenuDayHomeState extends State<WeekMenuDayHome> {
         centerTitle: true,
         actions: [
           Container(
-            padding: const EdgeInsets.all(8),
-            alignment: Alignment.center,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('HOJE: '),
-                Text(
-                  getWeekDay(),
-                  style: const TextStyle(fontSize: 16),
-                ),
-              ],
-            )
-          ),
+              padding: const EdgeInsets.all(8),
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('HOJE: '),
+                  Text(
+                    widget.controller.getWeekDay(DateTime.now()),
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ],
+              )),
         ],
       ),
       body: SingleChildScrollView(
@@ -79,9 +55,9 @@ class _WeekMenuDayHomeState extends State<WeekMenuDayHome> {
                   childAspectRatio: 1,
                   maxCrossAxisExtent: 300,
                 ),
-                itemCount: controller.menuList.length,
+                itemCount: menuItemList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var item = controller.menuList[index];
+                  var item = menuItemList[index];
                   return GestureDetector(
                     onTap: () {
                       Navigator.push(
