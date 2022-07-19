@@ -1,3 +1,4 @@
+import 'package:cardapio/android/controllers/impl/week_menu_controller_impl.dart';
 import 'package:cardapio/android/week_menu/week_menu_day_home.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,8 @@ class DaysOfWeek extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const WeekMenuDayHome(),
+              builder: (context) =>
+                  WeekMenuDayHome(controller: WeekMenuControllerImpl()),
             ),
           );
         },
@@ -34,7 +36,7 @@ class DaysOfWeek extends StatelessWidget {
                 ),
                 Flexible(
                   flex: 3,
-                  fit: FlexFit.tight,             
+                  fit: FlexFit.tight,
                   child: Text(
                     weekDay,
                     style: const TextStyle(fontSize: 20),
@@ -55,17 +57,29 @@ class DaysOfWeek extends StatelessWidget {
       body: ListView(
         children: [
           getTile('Domingo'),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           getTile('Segunda-Feira'),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           getTile('Terça-Feira'),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           getTile('Quarta-Feira'),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           getTile('Quinta-Feira'),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           getTile('Sexta-Feira'),
-          const SizedBox(height: 5,),
+          const SizedBox(
+            height: 5,
+          ),
           getTile('Sábado'),
         ],
       ),
