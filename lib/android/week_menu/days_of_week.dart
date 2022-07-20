@@ -1,4 +1,3 @@
-import 'package:cardapio/android/controllers/impl/week_menu_controller_impl.dart';
 import 'package:cardapio/android/week_menu/week_menu_day_home.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,7 @@ class DaysOfWeek extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) =>
-                  WeekMenuDayHome(controller: WeekMenuControllerImpl()),
+                  const WeekMenuDayHome(),
             ),
           );
         },
