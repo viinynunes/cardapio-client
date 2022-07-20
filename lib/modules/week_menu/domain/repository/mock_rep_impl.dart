@@ -15,7 +15,7 @@ class MockRepImpl implements IItemMenuRepository {
     for (int i = 1; i <= 100; i++) {
       menuList.add(
         ItemMenu(
-            'Arroz com Feijão e Batata Frita $i',
+            'Arroz com Farinha Temperada e Batata Frita $i',
             'comida feita com o ingrediente de numero ${i * 35}, recheado com o molho de numero ${i * 17} e também temperado com ervas número ${i * 23}',
             'https://portal.fgv.br/sites/portal.fgv.br/files/'
                 'styles/noticia_geral/public/noticias/set/17/'
