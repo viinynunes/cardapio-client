@@ -1,5 +1,5 @@
-import 'package:cardapio/android/controllers/bloc/events/events.dart';
-import 'package:cardapio/android/controllers/bloc/states/states.dart';
+import 'package:cardapio/android/controllers/bloc/events/week_menu_events.dart';
+import 'package:cardapio/android/controllers/bloc/states/week_menu_states.dart';
 import 'package:cardapio/android/controllers/bloc/week_menu_bloc.dart';
 import 'package:cardapio/android/week_menu/week_menu_day_item.dart';
 import 'package:flutter/material.dart';
