@@ -5,5 +5,3 @@ import 'android/android_main.dart';
 void main() {
   runApp(const AndroidMain());
 }
-
-
