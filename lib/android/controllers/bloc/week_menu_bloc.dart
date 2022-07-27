@@ -10,12 +10,15 @@ class WeekMenuBlock extends Bloc<MenuEvent, MenuState> {
 
   WeekMenuBlock() : super(MenuInitialState()) {
     on<GetListByDayEvent>((event, emit) async {
-      final result = await usecase.getItemMenuByDay(event.dateTime);
+      emit(MenuLoadingState());
+
+      final result = await usecase.getItemMenuByDay(event.weekday);
 
       if (result.isLeft()) {
-        emit(MenuError(error: result.fold((l) => l, (r) => GetMenuError(''))));
+        emit(MenuErrorState(
+            error: result.fold((l) => l, (r) => GetMenuError(''))));
       } else {
-        emit(MenuSuccess(
+        emit(MenuSuccessState(
             menuByDayList: result.fold((l) => [], (r) => r),
             error: GetMenuError('')));
       }
