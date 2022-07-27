@@ -1,86 +1,83 @@
-import 'package:cardapio/android/week_menu/week_menu_day_home.dart';
+import 'package:cardapio/android/controllers/bloc/days_of_week_bloc.dart';
+import 'package:cardapio/android/controllers/bloc/states/days_of_week_state.dart';
+import 'package:cardapio/android/week_menu/days_of_week_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DaysOfWeek extends StatelessWidget {
+import '../controllers/bloc/events/days_of_week_event.dart';
+
+class DaysOfWeek extends StatefulWidget {
   const DaysOfWeek({Key? key}) : super(key: key);
 
   @override
+  State<DaysOfWeek> createState() => _DaysOfWeekState();
+}
+
+class _DaysOfWeekState extends State<DaysOfWeek> {
+  late DaysOfWeekBloc bloc;
+
+  @override
+  void initState() {
+    super.initState();
+
+    bloc = DaysOfWeekBloc();
+    bloc.add(GetOrderedWeekdaysOrderedByToday(DateTime.now()));
+  }
+
+  @override
+  void dispose() {
+    bloc.close();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    getTile(String weekDay) {
-      return GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) =>
-                  const WeekMenuDayHome(),
-            ),
-          );
-        },
-        child: Card(
-          child: Container(
-            height: size.height * 0.1,
-            color: Colors.grey.withOpacity(0.3),
-            padding: const EdgeInsets.all(8),
-            child: Row(
-              children: [
-                const Flexible(
-                  fit: FlexFit.tight,
-                  child: Icon(
-                    Icons.calendar_month,
-                    size: 30,
-                    color: Colors.red,
-                  ),
-                ),
-                Flexible(
-                  flex: 3,
-                  fit: FlexFit.tight,
-                  child: Text(
-                    weekDay,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Selecione o dia'),
         centerTitle: true,
       ),
-      body: ListView(
-        children: [
-          getTile('Domingo'),
-          const SizedBox(
-            height: 5,
-          ),
-          getTile('Segunda-Feira'),
-          const SizedBox(
-            height: 5,
-          ),
-          getTile('Terça-Feira'),
-          const SizedBox(
-            height: 5,
-          ),
-          getTile('Quarta-Feira'),
-          const SizedBox(
-            height: 5,
-          ),
-          getTile('Quinta-Feira'),
-          const SizedBox(
-            height: 5,
-          ),
-          getTile('Sexta-Feira'),
-          const SizedBox(
-            height: 5,
-          ),
-          getTile('Sábado'),
-        ],
+      body: BlocBuilder(
+        bloc: bloc,
+        builder: (context, state) {
+          if (state is DaysOfWeekLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          if (state is DaysOfWeekError) {
+            final error = state.error;
+            return Center(
+              child: Container(
+                height: 200,
+                width: 200,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Colors.red,
+                ),
+                child: Text(
+                  error.message,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white, fontSize: 30),
+                ),
+              ),
+            );
+          }
+          if (state is DaysOfWeekSuccess) {
+            final list = state.weekdaysList;
+            return ListView.builder(
+              itemCount: list.length,
+              itemBuilder: (context, index) {
+                final weekday = list[index];
+                return DaysOfWeekTile(weekday: weekday);
+              },
+            );
+          }
+          return Container();
+        },
       ),
     );
   }
