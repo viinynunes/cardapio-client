@@ -3,3 +3,9 @@ class GetMenuError implements Exception {
 
   GetMenuError(this.message);
 }
+
+class GetDaysOfWeekError implements Exception {
+  String message;
+
+  GetDaysOfWeekError(this.message);
+}
