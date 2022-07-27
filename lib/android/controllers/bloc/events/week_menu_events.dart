@@ -1,7 +1,9 @@
+import 'package:cardapio/modules/week_menu/domain/entities/weekday.dart';
+
 abstract class MenuEvent {}
 
 class GetListByDayEvent extends MenuEvent {
-  DateTime dateTime;
+  Weekday weekday;
 
-  GetListByDayEvent(this.dateTime);
+  GetListByDayEvent(this.weekday);
 }
