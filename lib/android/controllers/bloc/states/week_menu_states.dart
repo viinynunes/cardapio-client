@@ -12,13 +12,17 @@ class MenuInitialState extends MenuState {
   MenuInitialState() : super(menuByDayList: [], error: GetMenuError(''));
 }
 
-class MenuSuccess extends MenuState {
-  MenuSuccess(
+class MenuLoadingState extends MenuState {
+  MenuLoadingState() : super(menuByDayList: [], error: GetMenuError(''));
+}
+
+class MenuSuccessState extends MenuState {
+  MenuSuccessState(
       {required List<ItemMenu> menuByDayList, required GetMenuError error})
       : super(menuByDayList: menuByDayList, error: error);
 }
 
-class MenuError extends MenuState {
-  MenuError({required GetMenuError error})
+class MenuErrorState extends MenuState {
+  MenuErrorState({required GetMenuError error})
       : super(menuByDayList: [], error: error);
 }
