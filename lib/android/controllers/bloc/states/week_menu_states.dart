@@ -18,8 +18,8 @@ class MenuLoadingState extends MenuState {
 
 class MenuSuccessState extends MenuState {
   MenuSuccessState(
-      {required List<ItemMenu> menuByDayList, required GetMenuError error})
-      : super(menuByDayList: menuByDayList, error: error);
+      {required List<ItemMenu> menuByDayList})
+      : super(menuByDayList: menuByDayList, error: GetMenuError(''));
 }
 
 class MenuErrorState extends MenuState {
