@@ -9,3 +9,9 @@ class GetDaysOfWeekError implements Exception {
 
   GetDaysOfWeekError(this.message);
 }
+
+class MenuCartError implements Exception {
+  String message;
+
+  MenuCartError(this.message);
+}
