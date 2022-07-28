@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WeekMenuDayHome extends StatefulWidget {
-  const WeekMenuDayHome({Key? key, required this.weekday}) : super(key: key);
+  const WeekMenuDayHome({Key? key, required this.weekday, required this.today})
+      : super(key: key);
 
   final Weekday weekday;
+  final Weekday today;
 
   @override
   State<WeekMenuDayHome> createState() => _WeekMenuDayHomeState();
@@ -38,22 +40,33 @@ class _WeekMenuDayHomeState extends State<WeekMenuDayHome> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pratos do dia'),
-        centerTitle: true,
+        title: Text('Pratos de ${widget.weekday.name}'),
         actions: [
           Container(
-              padding: const EdgeInsets.all(8),
-              alignment: Alignment.center,
+            padding: const EdgeInsets.all(8),
+            alignment: Alignment.center,
+            child: GestureDetector(
+              onTap: () {
+                !widget.weekday.today
+                    ? Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WeekMenuDayHome(
+                                weekday: widget.today, today: widget.today)))
+                    : null;
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text('HOJE: '),
+                children: [
+                  const Text('HOJE: '),
                   Text(
-                    'AAAAA',
-                    style: TextStyle(fontSize: 16),
+                    widget.today.name,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ],
-              )),
+              ),
+            ),
+          ),
         ],
       ),
       body: SingleChildScrollView(
