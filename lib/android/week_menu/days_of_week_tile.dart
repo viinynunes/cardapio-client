@@ -1,24 +1,20 @@
-import 'package:cardapio/android/week_menu/week_menu_day_home.dart';
 import 'package:cardapio/modules/week_menu/domain/entities/weekday.dart';
 import 'package:flutter/material.dart';
 
 class DaysOfWeekTile extends StatelessWidget {
-  const DaysOfWeekTile({Key? key, required this.weekday}) : super(key: key);
+  const DaysOfWeekTile(
+      {Key? key, required this.weekday, required this.onClickPage})
+      : super(key: key);
 
   final Weekday weekday;
+  final VoidCallback onClickPage;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => WeekMenuDayHome(weekday: weekday,),
-          ),
-        );
-      },
+      onTap: onClickPage,
       child: Card(
         child: Container(
           height: size.height * 0.1,

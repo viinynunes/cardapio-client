@@ -1,6 +1,7 @@
 import 'package:cardapio/android/controllers/bloc/days_of_week_bloc.dart';
 import 'package:cardapio/android/controllers/bloc/states/days_of_week_state.dart';
 import 'package:cardapio/android/week_menu/days_of_week_tile.dart';
+import 'package:cardapio/android/week_menu/week_menu_day_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -72,7 +73,20 @@ class _DaysOfWeekState extends State<DaysOfWeek> {
               itemCount: list.length,
               itemBuilder: (context, index) {
                 final weekday = list[index];
-                return DaysOfWeekTile(weekday: weekday);
+                return DaysOfWeekTile(
+                  weekday: weekday,
+                  onClickPage: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => WeekMenuDayHome(
+                          weekday: weekday,
+                          today: list
+                              .singleWhere((element) => element.today == true),
+                        ),
+                      ),
+                    );
+                  },
+                );
               },
             );
           }
