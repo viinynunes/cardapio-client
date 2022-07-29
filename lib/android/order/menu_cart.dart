@@ -132,17 +132,24 @@ class _MenuCartState extends State<MenuCart> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    item.name,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(fontSize: 22),
+                                  Flexible(
+                                    flex: 3,
+                                    child: Text(
+                                      item.name,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(fontSize: 22),
+                                    ),
                                   ),
-                                  ElevatedButton(
-                                      onPressed: () {
-                                        bloc.add(RemoveItemMenuFromCart(item));
-                                        bloc.add(GetMenuCartList());
-                                      },
-                                      child: const Text('Remover Item'))
+                                  Flexible(
+                                    flex: 1,
+                                    child: ElevatedButton(
+                                        onPressed: () {
+                                          bloc.add(
+                                              RemoveItemMenuFromCart(item));
+                                          bloc.add(GetMenuCartList());
+                                        },
+                                        child: const Text('Remover Item')),
+                                  )
                                 ],
                               ),
                             ),
