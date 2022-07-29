@@ -32,6 +32,14 @@ class MockRepImpl implements IItemMenuRepository {
 class MockRepMenuCartImpl implements IMenuCartRepository {
   List<ItemMenu> cartItemMenuList = [];
 
+  static final MockRepMenuCartImpl _mockMenuRep = MockRepMenuCartImpl._internal();
+
+  factory MockRepMenuCartImpl() {
+    return _mockMenuRep;
+  }
+
+  MockRepMenuCartImpl._internal();
+
   @override
   Future<Either<MenuCartError, ItemMenu>> addItemToCart(
       ItemMenu itemMenu) async {
