@@ -13,6 +13,15 @@ class MenuCartUsecaseImpl implements IMenuCartUsecase {
   MenuCartUsecaseImpl(this._repository);
 
   @override
+  Future<Either<MenuCartError, ItemMenu>> addItemToCart(ItemMenu itemMenu) async {
+    if (itemMenu.name.isEmpty || itemMenu.description.isEmpty || itemMenu.imgUrl.isEmpty){
+      return Left(MenuCartError('Invalid item menu'));
+    }
+
+    return _repository.addItemToCart(itemMenu);
+  }
+
+  @override
   Future<Either<MenuCartError, bool>> removeItemFromCart(
       ItemMenu itemMenu) async {
     if (itemMenu.name.isEmpty) {
