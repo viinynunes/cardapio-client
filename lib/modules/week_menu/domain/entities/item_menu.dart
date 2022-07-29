@@ -3,5 +3,11 @@ class ItemMenu {
   String description;
   String imgUrl;
 
-  ItemMenu(this.name, this.description, this.imgUrl);
+  final List<int> weekdayList;
+
+  ItemMenu(
+      {required this.name,
+      required this.description,
+      required this.imgUrl,
+      required this.weekdayList});
 }
