@@ -46,12 +46,15 @@ class _WeekMenuDayItemState extends State<WeekMenuDayItem> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          bloc.add(AddItemMenuToCartEvent(widget.menuItem));
-        },
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton:
+          widget.menuItem.weekdayList.contains(DateTime.now().weekday)
+              ? FloatingActionButton(
+                  onPressed: () {
+                    bloc.add(AddItemMenuToCartEvent(widget.menuItem));
+                  },
+                  child: const Icon(Icons.add),
+                )
+              : null,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
