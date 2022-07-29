@@ -1,5 +1,6 @@
 import 'package:cardapio/modules/week_menu/domain/entities/item_menu.dart';
 import 'package:cardapio/modules/week_menu/domain/entities/weekday.dart';
+import 'package:cardapio/modules/week_menu/domain/repository/i_menu_cart_repository.dart';
 
 import 'package:cardapio/modules/week_menu/errors/get_menu_error.dart';
 
@@ -25,5 +26,34 @@ class MockRepImpl implements IItemMenuRepository {
     }
 
     return Right(menuList);
+  }
+}
+
+class MockRepMenuCartImpl implements IMenuCartRepository {
+  List<ItemMenu> cartItemMenuList = [];
+
+  @override
+  Future<Either<MenuCartError, ItemMenu>> addItemToCart(
+      ItemMenu itemMenu) async {
+    cartItemMenuList.add(itemMenu);
+
+    return Right(itemMenu);
+  }
+
+  @override
+  Future<Either<MenuCartError, bool>> removeItemFromCart(
+      ItemMenu itemMenu) async {
+    final result = cartItemMenuList.remove(itemMenu);
+
+    if (result == false) {
+      return Left(MenuCartError('Error removing item menu from cart'));
+    }
+
+    return Right(result);
+  }
+
+  @override
+  Future<Either<MenuCartError, List<ItemMenu>>> getMenuCartList() async {
+    return Right(cartItemMenuList);
   }
 }
