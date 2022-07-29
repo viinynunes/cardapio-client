@@ -10,12 +10,18 @@ abstract class WeekMenuDayItemStates {
 
 class WeekMenuDayItemInitialState extends WeekMenuDayItemStates {
   WeekMenuDayItemInitialState()
-      : super(itemMenu: ItemMenu('', '', ''), error: MenuCartError(''));
+      : super(
+            itemMenu: ItemMenu(
+                name: '', description: '', imgUrl: '', weekdayList: []),
+            error: MenuCartError(''));
 }
 
 class WeekMenuDayItemLoadingState extends WeekMenuDayItemStates {
   WeekMenuDayItemLoadingState()
-      : super(itemMenu: ItemMenu('', '', ''), error: MenuCartError(''));
+      : super(
+            itemMenu: ItemMenu(
+                name: '', description: '', imgUrl: '', weekdayList: []),
+            error: MenuCartError(''));
 }
 
 class WeekMenuDayItemSuccessState extends WeekMenuDayItemStates {
@@ -25,5 +31,8 @@ class WeekMenuDayItemSuccessState extends WeekMenuDayItemStates {
 
 class WeekMenuDayItemErrorState extends WeekMenuDayItemStates {
   WeekMenuDayItemErrorState({required MenuCartError error})
-      : super(itemMenu: ItemMenu('', '', ''), error: error);
+      : super(
+            itemMenu: ItemMenu(
+                name: '', description: '', imgUrl: '', weekdayList: []),
+            error: error);
 }
