@@ -20,18 +20,17 @@ class DaysOfWeekUsecaseImpl implements IDaysOfWeekUsecase {
     list.sort((a, b) => todayAux.weekday.compareTo(a.weekday));
 
     return Right(list);
-    //return Left(GetDaysOfWeekError('Teste erro'));
   }
 
   _getWeekdayList() {
     return [
-      Weekday(1, 'Segunda-Feira', false),
-      Weekday(2, 'Terça-Feira', false),
-      Weekday(3, 'Quarta-Feira', false),
-      Weekday(4, 'Quinta-Feira', false),
-      Weekday(5, 'Sexta-Feira', false),
-      Weekday(6, 'Sábado', false),
-      Weekday(7, 'Domingo', false),
+      Weekday(1, 'Domingo', false),
+      Weekday(2, 'Segunda-Feira', false),
+      Weekday(3, 'Terça-Feira', false),
+      Weekday(4, 'Quarta-Feira', false),
+      Weekday(5, 'Quinta-Feira', false),
+      Weekday(6, 'Sexta-Feira', false),
+      Weekday(7, 'Sábado', false),
     ];
   }
 }
