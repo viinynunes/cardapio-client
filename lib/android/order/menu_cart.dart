@@ -1,6 +1,7 @@
 import 'package:cardapio/android/controllers/bloc/events/menu_cart_events.dart';
 import 'package:cardapio/android/controllers/bloc/menu_cart_bloc.dart';
 import 'package:cardapio/android/controllers/bloc/states/menu_cart_states.dart';
+import 'package:cardapio/android/order/menu_cart_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,8 +31,6 @@ class _MenuCartState extends State<MenuCart> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
         appBar: AppBar(
           title: const Text('Carrinho'),
@@ -106,57 +105,12 @@ class _MenuCartState extends State<MenuCart> {
                 itemBuilder: (context, index) {
                   var item = menuItemCartList[index];
 
-                  return Card(
-                    child: Container(
-                      height: size.height * 0.2,
-                      margin: const EdgeInsets.all(16),
-                      child: Row(
-                        children: [
-                          Flexible(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(item.imgUrl),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Flexible(
-                                    flex: 3,
-                                    child: Text(
-                                      item.name,
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(fontSize: 22),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    flex: 1,
-                                    child: ElevatedButton(
-                                        onPressed: () {
-                                          bloc.add(
-                                              RemoveItemMenuFromCart(item));
-                                          bloc.add(GetMenuCartList());
-                                        },
-                                        child: const Text('Remover Item')),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  return MenuCartTile(
+                    item: item,
+                    removeItemButtonAction: () {
+                      bloc.add(RemoveItemMenuFromCart(item));
+                      bloc.add(GetMenuCartList());
+                    },
                   );
                 },
               );
