@@ -1,7 +1,7 @@
 import 'package:cardapio/android/controllers/bloc/events/menu_cart_events.dart';
 import 'package:cardapio/android/controllers/bloc/menu_cart_bloc.dart';
 import 'package:cardapio/android/controllers/bloc/states/menu_cart_states.dart';
-import 'package:cardapio/android/order/menu_cart_tile.dart';
+import 'package:cardapio/android/pages/order/menu_cart_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

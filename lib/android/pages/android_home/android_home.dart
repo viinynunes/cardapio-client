@@ -1,7 +1,7 @@
-import 'package:cardapio/android/android_home/home_menu_tile.dart';
-import 'package:cardapio/android/login/login_home.dart';
-import 'package:cardapio/android/order/menu_cart.dart';
-import 'package:cardapio/android/week_menu/days_of_week.dart';
+import 'package:cardapio/android/pages/android_home/home_menu_tile.dart';
+import 'package:cardapio/android/pages/login/login_home.dart';
+import 'package:cardapio/android/pages/order/menu_cart.dart';
+import 'package:cardapio/android/pages/week_menu/days_of_week.dart';
 import 'package:flutter/material.dart';
 
 class AndroidHome extends StatelessWidget {

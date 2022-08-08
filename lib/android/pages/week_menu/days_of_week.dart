@@ -1,11 +1,10 @@
 import 'package:cardapio/android/controllers/bloc/days_of_week_bloc.dart';
+import 'package:cardapio/android/controllers/bloc/events/days_of_week_event.dart';
 import 'package:cardapio/android/controllers/bloc/states/days_of_week_state.dart';
-import 'package:cardapio/android/week_menu/days_of_week_tile.dart';
-import 'package:cardapio/android/week_menu/week_menu_day_home.dart';
+import 'package:cardapio/android/pages/week_menu/days_of_week_tile.dart';
+import 'package:cardapio/android/pages/week_menu/week_menu_day_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../controllers/bloc/events/days_of_week_event.dart';
 
 class DaysOfWeek extends StatefulWidget {
   const DaysOfWeek({Key? key}) : super(key: key);
