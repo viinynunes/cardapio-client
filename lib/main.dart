@@ -1,7 +1,8 @@
+import 'package:cardapio/main_app.dart';
+import 'package:cardapio/main_module.dart';
 import 'package:flutter/material.dart';
-
-import 'android/android_main.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 void main() {
-  runApp(const AndroidMain());
+  return runApp(ModularApp(module: MainModule(), child: const MainApp()));
 }
