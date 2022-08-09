@@ -4,6 +4,7 @@ import 'package:cardapio/android/controllers/bloc/states/menu_cart_states.dart';
 import 'package:cardapio/android/pages/order/menu_cart_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class MenuCart extends StatefulWidget {
   const MenuCart({Key? key}) : super(key: key);
@@ -13,13 +14,12 @@ class MenuCart extends StatefulWidget {
 }
 
 class _MenuCartState extends State<MenuCart> {
-  late final MenuCartBloc bloc;
+  final bloc = Modular.get<MenuCartBloc>();
 
   @override
   void initState() {
     super.initState();
 
-    bloc = MenuCartBloc();
     bloc.add(GetMenuCartList());
   }
 

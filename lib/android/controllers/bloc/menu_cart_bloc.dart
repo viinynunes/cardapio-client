@@ -1,14 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:cardapio/android/controllers/bloc/events/menu_cart_events.dart';
 import 'package:cardapio/android/controllers/bloc/states/menu_cart_states.dart';
-import 'package:cardapio/modules/week_menu/domain/repository/mock_rep_impl.dart';
 import 'package:cardapio/modules/week_menu/domain/usecases/i_menu_cart_usecase.dart';
-import 'package:cardapio/modules/week_menu/domain/usecases/impl/menu_cart_usecase_impl.dart';
 
 class MenuCartBloc extends Bloc<MenuCartEvents, MenuCartStates> {
-  final IMenuCartUsecase usecase = MenuCartUsecaseImpl(MockRepMenuCartImpl());
+  final IMenuCartUsecase usecase;
 
-  MenuCartBloc() : super(MenuCartInitialState()) {
+  MenuCartBloc(this.usecase) : super(MenuCartInitialState()) {
     on<RemoveItemMenuFromCart>((event, emit) async {
       emit(MenuCartLoadingState());
 
