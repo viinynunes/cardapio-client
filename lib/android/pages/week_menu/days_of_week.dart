@@ -14,13 +14,11 @@ class DaysOfWeek extends StatefulWidget {
 }
 
 class _DaysOfWeekState extends State<DaysOfWeek> {
-  late DaysOfWeekBloc bloc;
+  final bloc = Modular.get<DaysOfWeekBloc>();
 
   @override
   void initState() {
     super.initState();
-
-    bloc = DaysOfWeekBloc();
     bloc.add(GetOrderedWeekdaysOrderedByToday(DateTime.now()));
   }
 

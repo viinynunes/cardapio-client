@@ -15,14 +15,7 @@ class MenuByDayItem extends StatefulWidget {
 }
 
 class _MenuByDayItemState extends State<MenuByDayItem> {
-  late final MenuByDayItemBloc bloc;
-
-  @override
-  void initState() {
-    super.initState();
-
-    bloc = MenuByDayItemBloc();
-  }
+  final bloc = Modular.get<MenuByDayItemBloc>();
 
   @override
   Widget build(BuildContext context) {

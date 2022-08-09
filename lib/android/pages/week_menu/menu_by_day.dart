@@ -18,13 +18,11 @@ class MenuByDayHome extends StatefulWidget {
 }
 
 class _MenuByDayHomeState extends State<MenuByDayHome> {
-  late final MenuByDayBloc bloc;
+  final bloc = Modular.get<MenuByDayBloc>();
 
   @override
   void initState() {
     super.initState();
-
-    bloc = MenuByDayBloc();
     bloc.add(GetListByDayEvent(widget.weekday));
   }
 
