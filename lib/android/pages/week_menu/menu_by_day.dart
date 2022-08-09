@@ -6,18 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class WeekMenuDayHome extends StatefulWidget {
-  const WeekMenuDayHome({Key? key, required this.weekday, required this.today})
+class MenuByDayHome extends StatefulWidget {
+  const MenuByDayHome({Key? key, required this.weekday, required this.today})
       : super(key: key);
 
   final Weekday weekday;
   final Weekday today;
 
   @override
-  State<WeekMenuDayHome> createState() => _WeekMenuDayHomeState();
+  State<MenuByDayHome> createState() => _MenuByDayHomeState();
 }
 
-class _WeekMenuDayHomeState extends State<WeekMenuDayHome> {
+class _MenuByDayHomeState extends State<MenuByDayHome> {
   late final WeekMenuBlock bloc;
 
   @override

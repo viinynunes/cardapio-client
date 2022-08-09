@@ -5,16 +5,16 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../modules/week_menu/domain/entities/item_menu.dart' as menu;
 
-class WeekMenuDayItem extends StatefulWidget {
-  const WeekMenuDayItem({Key? key, required this.menuItem}) : super(key: key);
+class MenuByDayItem extends StatefulWidget {
+  const MenuByDayItem({Key? key, required this.menuItem}) : super(key: key);
 
   final menu.ItemMenu menuItem;
 
   @override
-  State<WeekMenuDayItem> createState() => _WeekMenuDayItemState();
+  State<MenuByDayItem> createState() => _MenuByDayItemState();
 }
 
-class _WeekMenuDayItemState extends State<WeekMenuDayItem> {
+class _MenuByDayItemState extends State<MenuByDayItem> {
   late final WeekMenuDayItemBloc bloc;
 
   @override
