@@ -15,3 +15,9 @@ class MenuCartError implements Exception {
 
   MenuCartError(this.message);
 }
+
+class LoginError implements Exception {
+  String message;
+
+  LoginError(this.message);
+}
