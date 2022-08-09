@@ -1,6 +1,6 @@
 import 'package:cardapio/android/controllers/bloc/events/week_menu_events.dart';
 import 'package:cardapio/android/controllers/bloc/states/week_menu_states.dart';
-import 'package:cardapio/android/controllers/bloc/week_menu_bloc.dart';
+import 'package:cardapio/android/controllers/bloc/menu_by_day_bloc.dart';
 import 'package:cardapio/modules/week_menu/domain/entities/weekday.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,13 +18,13 @@ class MenuByDayHome extends StatefulWidget {
 }
 
 class _MenuByDayHomeState extends State<MenuByDayHome> {
-  late final WeekMenuBlock bloc;
+  late final MenuByDayBloc bloc;
 
   @override
   void initState() {
     super.initState();
 
-    bloc = WeekMenuBlock();
+    bloc = MenuByDayBloc();
     bloc.add(GetListByDayEvent(widget.weekday));
   }
 

@@ -5,11 +5,11 @@ import 'package:cardapio/modules/week_menu/domain/usecases/i_menu_cart_usecase.d
 import 'package:cardapio/modules/week_menu/domain/usecases/impl/menu_cart_usecase_impl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class WeekMenuDayItemBloc
+class MenuByDayItemBloc
     extends Bloc<WeekMenuDayItemEvents, WeekMenuDayItemStates> {
   final IMenuCartUsecase usecase = MenuCartUsecaseImpl(MockRepMenuCartImpl());
 
-  WeekMenuDayItemBloc() : super(WeekMenuDayItemInitialState()) {
+  MenuByDayItemBloc() : super(WeekMenuDayItemInitialState()) {
     on<AddItemMenuToCartEvent>((event, emit) async {
       emit(WeekMenuDayItemLoadingState());
 
