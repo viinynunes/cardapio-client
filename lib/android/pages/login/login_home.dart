@@ -1,5 +1,5 @@
-import 'package:cardapio/android/pages/android_home/android_home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class LoginHome extends StatefulWidget {
   const LoginHome({Key? key}) : super(key: key);
@@ -69,12 +69,7 @@ class _LoginHomeState extends State<LoginHome> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const AndroidHome(),
-                              ),
-                            );
+                            Modular.to.navigate('/android-home/');
                           }
                         },
                         child: const Text('Entrar'),

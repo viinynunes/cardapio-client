@@ -1,10 +1,10 @@
 import 'package:cardapio/android/controllers/bloc/events/week_menu_events.dart';
 import 'package:cardapio/android/controllers/bloc/states/week_menu_states.dart';
 import 'package:cardapio/android/controllers/bloc/week_menu_bloc.dart';
-import 'package:cardapio/android/pages/week_menu/week_menu_day_item.dart';
 import 'package:cardapio/modules/week_menu/domain/entities/weekday.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class WeekMenuDayHome extends StatefulWidget {
   const WeekMenuDayHome({Key? key, required this.weekday, required this.today})
@@ -48,11 +48,8 @@ class _WeekMenuDayHomeState extends State<WeekMenuDayHome> {
             child: GestureDetector(
               onTap: () {
                 !widget.weekday.today
-                    ? Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => WeekMenuDayHome(
-                                weekday: widget.today, today: widget.today)))
+                    ? Modular.to.pushNamed('././menu-by-day',
+                        arguments: [widget.today, widget.today])
                     : null;
               },
               child: Row(
@@ -120,13 +117,8 @@ class _WeekMenuDayHomeState extends State<WeekMenuDayHome> {
 
                         return GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    WeekMenuDayItem(menuItem: item),
-                              ),
-                            );
+                            Modular.to.pushNamed('././menu-by-day-item',
+                                arguments: [item]);
                           },
                           child: Stack(
                             children: [

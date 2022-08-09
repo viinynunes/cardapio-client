@@ -1,8 +1,6 @@
 import 'package:cardapio/android/pages/android_home/home_menu_tile.dart';
-import 'package:cardapio/android/pages/login/login_home.dart';
-import 'package:cardapio/android/pages/order/menu_cart.dart';
-import 'package:cardapio/android/pages/week_menu/days_of_week.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class AndroidHome extends StatelessWidget {
   const AndroidHome({Key? key}) : super(key: key);
@@ -16,12 +14,7 @@ class AndroidHome extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LoginHome(),
-                ),
-              );
+              Modular.to.navigate('/login/');
             },
             icon: const Icon(Icons.power_settings_new_outlined),
           ),
@@ -35,12 +28,7 @@ class AndroidHome extends StatelessWidget {
               title: 'Cardápio da Semana',
               icon: Icons.menu_book,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DaysOfWeek(),
-                  ),
-                );
+                Modular.to.pushNamed('/week-menu');
               },
             ),
             const SizedBox(
@@ -50,12 +38,7 @@ class AndroidHome extends StatelessWidget {
               title: 'Reserva de Pratos',
               icon: Icons.reorder,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MenuCart(),
-                  ),
-                );
+                Modular.to.pushNamed('/order');
               },
             ),
             const SizedBox(

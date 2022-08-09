@@ -2,9 +2,9 @@ import 'package:cardapio/android/controllers/bloc/days_of_week_bloc.dart';
 import 'package:cardapio/android/controllers/bloc/events/days_of_week_event.dart';
 import 'package:cardapio/android/controllers/bloc/states/days_of_week_state.dart';
 import 'package:cardapio/android/pages/week_menu/days_of_week_tile.dart';
-import 'package:cardapio/android/pages/week_menu/week_menu_day_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class DaysOfWeek extends StatefulWidget {
   const DaysOfWeek({Key? key}) : super(key: key);
@@ -75,15 +75,10 @@ class _DaysOfWeekState extends State<DaysOfWeek> {
                 return DaysOfWeekTile(
                   weekday: weekday,
                   onClickPage: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => WeekMenuDayHome(
-                          weekday: weekday,
-                          today: list
-                              .singleWhere((element) => element.today == true),
-                        ),
-                      ),
-                    );
+                    Modular.to.pushNamed('././menu-by-day', arguments: [
+                      weekday,
+                      list.singleWhere((element) => element.today == true),
+                    ]);
                   },
                 );
               },

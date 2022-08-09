@@ -1,7 +1,7 @@
 import 'package:cardapio/android/controllers/bloc/events/week_menu_day_item_events.dart';
 import 'package:cardapio/android/controllers/bloc/week_menu_day_item_bloc.dart';
-import 'package:cardapio/android/pages/order/menu_cart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../modules/week_menu/domain/entities/item_menu.dart' as menu;
 
@@ -35,12 +35,7 @@ class _WeekMenuDayItemState extends State<WeekMenuDayItem> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const MenuCart(),
-                ),
-              );
+              Modular.to.pushNamed('/order');
             },
             icon: const Icon(Icons.shopping_cart_outlined),
           ),
