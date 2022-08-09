@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:cardapio/modules/week_menu/domain/entities/item_menu.dart';
 import 'package:cardapio/modules/week_menu/domain/entities/weekday.dart';
 import 'package:cardapio/modules/week_menu/domain/repository/i_menu_cart_repository.dart';
-import 'package:cardapio/modules/week_menu/errors/get_menu_error.dart';
+import 'package:cardapio/modules/week_menu/errors/errors.dart';
 import 'package:dartz/dartz.dart';
 
 import 'i_menu_item_repository.dart';

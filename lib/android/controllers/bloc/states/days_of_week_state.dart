@@ -1,5 +1,5 @@
 import 'package:cardapio/modules/week_menu/domain/entities/weekday.dart';
-import 'package:cardapio/modules/week_menu/errors/get_menu_error.dart';
+import 'package:cardapio/modules/week_menu/errors/errors.dart';
 
 abstract class DaysOfWeekState {
   List<Weekday> weekdaysList;

@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:cardapio/android/controllers/bloc/events/days_of_week_event.dart';
 import 'package:cardapio/android/controllers/bloc/states/days_of_week_state.dart';
 import 'package:cardapio/modules/week_menu/domain/usecases/i_days_of_week_usecase.dart';
-import 'package:cardapio/modules/week_menu/errors/get_menu_error.dart';
+import 'package:cardapio/modules/week_menu/errors/errors.dart';
 
 class DaysOfWeekBloc extends Bloc<DaysOfWeekEvent, DaysOfWeekState> {
   final IDaysOfWeekUsecase usecase;
