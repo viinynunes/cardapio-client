@@ -3,28 +3,24 @@ import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
 import '../../../../errors/errors.dart';
 
 abstract class MenuCartStates {
-  List<ItemMenu> menuItemCartList;
-  MenuCartError error;
-
-  MenuCartStates({required this.menuItemCartList, required this.error});
 }
 
 class MenuCartInitialState extends MenuCartStates {
-  MenuCartInitialState()
-      : super(menuItemCartList: [], error: MenuCartError(''));
 }
 
 class MenuCartLoadingState extends MenuCartStates {
-  MenuCartLoadingState()
-      : super(menuItemCartList: [], error: MenuCartError(''));
 }
 
 class MenuCartSuccessState extends MenuCartStates {
-  MenuCartSuccessState({required List<ItemMenu> menuItemCartList})
-      : super(menuItemCartList: menuItemCartList, error: MenuCartError(''));
+
+  final List<ItemMenu> menuItemCartList;
+
+  MenuCartSuccessState({required this.menuItemCartList});
 }
 
 class MenuCartErrorState extends MenuCartStates {
-  MenuCartErrorState({required MenuCartError error})
-      : super(menuItemCartList: [], error: error);
+
+  final MenuCartError error;
+
+  MenuCartErrorState({required this.error});
 }
