@@ -21,3 +21,9 @@ class LoginError implements Exception {
 
   LoginError(this.message);
 }
+
+class OrderError implements Exception {
+  String message;
+
+  OrderError(this.message);
+}
