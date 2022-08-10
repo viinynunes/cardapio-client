@@ -1,8 +1,8 @@
-import 'package:cardapio/android/modules/login_module.dart';
-import 'package:cardapio/android/modules/order_module.dart';
-import 'package:cardapio/android/modules/week_menu_module.dart';
-import 'package:cardapio/android/pages/android_home/android_home.dart';
-import 'package:cardapio/android/pages/splash/splash_screen.dart';
+import 'package:cardapio/modules/login/login_module.dart';
+import 'package:cardapio/modules/order/order_module.dart';
+import 'package:cardapio/modules/menu/menu_module.dart';
+import 'package:cardapio/modules/home/presenter/pages/home_page.dart';
+import 'package:cardapio/modules/splash/splash_screen.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class MainModule extends Module {
@@ -12,9 +12,9 @@ class MainModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (_, __) => const SplashScreenInitial()),
-        ChildRoute('/android-home', child: (_, __) => const AndroidHome()),
-        ModuleRoute('/week-menu', module: WeekMenuModule()),
+        ChildRoute('/home', child: (_, __) => const HomePage()),
         ModuleRoute('/login/', module: LoginModule()),
+        ModuleRoute('/menu', module: MenuModule()),
         ModuleRoute('/order/', module: OrderModule()),
       ];
 }

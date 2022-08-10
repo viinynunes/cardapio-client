@@ -1,5 +1,5 @@
 import 'package:cardapio/modules/login/domain/entities/user.dart';
-import 'package:cardapio/modules/week_menu/errors/errors.dart';
+import 'package:cardapio/modules/menu/errors/errors.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class ILoginRepository {
