@@ -1,10 +1,9 @@
 import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
 import 'package:cardapio/modules/order/domain/repositories/i_menu_cart_repository.dart';
 
-import 'package:cardapio/modules/menu/errors/errors.dart';
-
 import 'package:dartz/dartz.dart';
 
+import '../../../../errors/errors.dart';
 import '../i_menu_cart_usecase.dart';
 
 class MenuCartUsecaseImpl implements IMenuCartUsecase {

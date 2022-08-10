@@ -1,6 +1,7 @@
 import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
-import 'package:cardapio/modules/menu/errors/errors.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../../errors/errors.dart';
 
 abstract class IMenuCartRepository {
 

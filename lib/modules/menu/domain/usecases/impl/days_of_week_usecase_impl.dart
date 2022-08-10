@@ -1,7 +1,8 @@
 import 'package:cardapio/modules/menu/domain/entities/weekday.dart';
 import 'package:cardapio/modules/menu/domain/usecases/i_days_of_week_usecase.dart';
-import 'package:cardapio/modules/menu/errors/errors.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../../../errors/errors.dart';
 
 class DaysOfWeekUsecaseImpl implements IDaysOfWeekUsecase {
   @override
