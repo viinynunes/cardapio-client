@@ -27,12 +27,6 @@ class _MenuByDayPageState extends State<MenuByDayPage> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    bloc.close();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
