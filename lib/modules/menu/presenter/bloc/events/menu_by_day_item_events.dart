@@ -7,3 +7,5 @@ class MenuByDayItemAddItemMenuToCartEvent extends MenuByDayItemEvents {
 
   MenuByDayItemAddItemMenuToCartEvent(this.itemMenu);
 }
+
+class MenuByDayItemGetMenuCartEvent extends MenuByDayItemEvents {}

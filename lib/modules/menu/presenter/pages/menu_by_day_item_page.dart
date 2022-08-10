@@ -1,6 +1,8 @@
 import 'package:cardapio/modules/menu/presenter/bloc/events/menu_by_day_item_events.dart';
 import 'package:cardapio/modules/menu/presenter/bloc/menu_by_day_item_bloc.dart';
+import 'package:cardapio/modules/menu/presenter/bloc/states/menu_by_day_item_states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '/../../modules/menu/domain/entities/item_menu.dart' as menu;
@@ -18,6 +20,13 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage> {
   final bloc = Modular.get<MenuByDayItemBloc>();
 
   @override
+  void initState() {
+    super.initState();
+
+    bloc.add(MenuByDayItemGetMenuCartEvent());
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
@@ -26,6 +35,18 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage> {
         title: Text(widget.menuItem.name),
         centerTitle: true,
         actions: [
+          BlocBuilder<MenuByDayItemBloc, MenuByDayItemStates>(
+            bloc: bloc,
+            builder: (context, state) {
+              if (state is MenuByDayItemSuccessState) {
+                return Center(
+                  child: Text(state.itemMenuList!.length.toString()),
+                );
+              }
+
+              return Container();
+            },
+          ),
           IconButton(
             onPressed: () {
               Modular.to.pushNamed('/order/');
@@ -39,6 +60,7 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage> {
           ? FloatingActionButton(
               onPressed: () {
                 bloc.add(MenuByDayItemAddItemMenuToCartEvent(widget.menuItem));
+                bloc.add(MenuByDayItemGetMenuCartEvent());
               },
               child: const Icon(Icons.add),
             )

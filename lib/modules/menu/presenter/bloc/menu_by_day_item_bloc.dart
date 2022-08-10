@@ -3,8 +3,7 @@ import 'package:cardapio/modules/menu/presenter/bloc/states/menu_by_day_item_sta
 import 'package:cardapio/modules/order/domain/usecases/i_menu_cart_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MenuByDayItemBloc
-    extends Bloc<MenuByDayItemEvents, MenuByDayItemStates> {
+class MenuByDayItemBloc extends Bloc<MenuByDayItemEvents, MenuByDayItemStates> {
   final IMenuCartUsecase usecase;
 
   MenuByDayItemBloc(this.usecase) : super(MenuByDayItemIdleState()) {
@@ -18,6 +17,15 @@ class MenuByDayItemBloc
       }, (r) {
         emit(MenuByDayItemSuccessState(itemMenu: r));
       });
+    });
+
+    on<MenuByDayItemGetMenuCartEvent>((event, emit) async {
+      emit(MenuByDayItemLoadingState());
+
+      final result = await usecase.getMenuCartList();
+
+      result.fold((l) => emit(MenuByDayItemErrorState(error: l)),
+          (r) => emit(MenuByDayItemSuccessState(itemMenuList: r)));
     });
   }
 }
