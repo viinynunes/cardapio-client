@@ -4,6 +4,7 @@ import 'package:cardapio/modules/menu/presenter/bloc/states/menu_by_day_item_sta
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lottie/lottie.dart';
 
 import '/../../modules/menu/domain/entities/item_menu.dart' as menu;
 
@@ -16,14 +17,26 @@ class MenuByDayItemPage extends StatefulWidget {
   State<MenuByDayItemPage> createState() => _MenuByDayItemPageState();
 }
 
-class _MenuByDayItemPageState extends State<MenuByDayItemPage> {
+class _MenuByDayItemPageState extends State<MenuByDayItemPage>
+    with TickerProviderStateMixin {
   final bloc = Modular.get<MenuByDayItemBloc>();
+
+  late final AnimationController _cartIconController;
 
   @override
   void initState() {
     super.initState();
+    _cartIconController = AnimationController(vsync: this);
+    _cartIconController.duration = const Duration(seconds: 1);
 
     bloc.add(MenuByDayItemGetMenuCartEvent());
+  }
+
+  @override
+  void dispose() {
+    _cartIconController.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -47,20 +60,33 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage> {
               return Container();
             },
           ),
-          IconButton(
-            onPressed: () {
-              Modular.to.pushNamed('/order/');
-            },
-            icon: const Icon(Icons.shopping_cart_outlined),
-          ),
+          GestureDetector(
+              onTap: () async {
+                await Modular.to.pushNamed('/order/');
+
+                bloc.add(MenuByDayItemGetMenuCartEvent());
+              },
+              child: Stack(
+                children: [
+                  Center(
+                    child: Lottie.asset('assets/lottie/cart-checkout.json',
+                        controller: _cartIconController),
+                  ),
+                ],
+              ))
         ],
       ),
       floatingActionButton: widget.menuItem.weekdayList
               .contains(DateTime.now().weekday)
           ? FloatingActionButton(
-              onPressed: () {
+              onPressed: () async {
                 bloc.add(MenuByDayItemAddItemMenuToCartEvent(widget.menuItem));
                 bloc.add(MenuByDayItemGetMenuCartEvent());
+
+                _cartIconController.forward();
+                await Future.delayed(const Duration(seconds: 1));
+
+                _cartIconController.reset();
               },
               child: const Icon(Icons.add),
             )
