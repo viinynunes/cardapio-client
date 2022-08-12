@@ -9,3 +9,5 @@ class RemoveItemMenuFromCart extends MenuCartEvents {
 
   RemoveItemMenuFromCart(this.item);
 }
+
+class MenuCartSendOrder extends MenuCartEvents {}
