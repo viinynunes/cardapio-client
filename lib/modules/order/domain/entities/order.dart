@@ -4,10 +4,10 @@ import '../../../menu/domain/entities/item_menu.dart';
 import 'enums/order_status_enum.dart';
 
 class Order {
-  final String id;
-  final User user;
-  final List<ItemMenu> menuList;
-  final DateTime registrationDate;
+  String id;
+  User user;
+  List<ItemMenu> menuList;
+  DateTime registrationDate;
   OrderStatus status;
 
   Order({
