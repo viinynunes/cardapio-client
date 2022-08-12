@@ -40,6 +40,10 @@ class _MenuCartPageState extends State<MenuCartPage>
 
   @override
   void dispose() {
+
+    orderLoadingAnimationController.dispose();
+    orderCompletedAnimationController.dispose();
+
     menuCartBloc.close();
     super.dispose();
   }
