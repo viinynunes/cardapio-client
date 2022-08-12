@@ -13,12 +13,17 @@ class HomePage extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {
-              Modular.to.navigate('/login/');
-            },
-            icon: const Icon(Icons.power_settings_new_outlined),
-          ),
+              onPressed: () {
+                Modular.to.pushNamed('./order/cart');
+              },
+              icon: const Icon(Icons.shopping_cart_outlined))
         ],
+        leading: IconButton(
+          onPressed: () {
+            Modular.to.navigate('/login/');
+          },
+          icon: const Icon(Icons.power_settings_new_outlined),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8),
@@ -35,7 +40,7 @@ class HomePage extends StatelessWidget {
               height: 10,
             ),
             HomeTile(
-              title: 'Reserva de Pratos',
+              title: 'Meus Pedidos',
               icon: Icons.reorder,
               onTap: () {
                 Modular.to.pushNamed('/order/');
