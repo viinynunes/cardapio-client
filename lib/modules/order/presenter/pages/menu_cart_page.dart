@@ -5,22 +5,28 @@ import 'package:cardapio/modules/order/presenter/pages/tiles/menu_cart_tile.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lottie/lottie.dart';
 
-class MenuCart extends StatefulWidget {
-  const MenuCart({Key? key}) : super(key: key);
+class MenuCartPage extends StatefulWidget {
+  const MenuCartPage({Key? key}) : super(key: key);
 
   @override
-  State<MenuCart> createState() => _MenuCartState();
+  State<MenuCartPage> createState() => _MenuCartPageState();
 }
 
-class _MenuCartState extends State<MenuCart> {
+class _MenuCartPageState extends State<MenuCartPage>
+    with TickerProviderStateMixin {
   final bloc = Modular.get<MenuCartBloc>();
+  late final AnimationController orderCompletedAnimationController;
 
   @override
   void initState() {
     super.initState();
 
     bloc.add(GetMenuCartList());
+
+    orderCompletedAnimationController = AnimationController(vsync: this);
+    orderCompletedAnimationController.duration = const Duration(seconds: 2);
   }
 
   @override
@@ -40,20 +46,25 @@ class _MenuCartState extends State<MenuCart> {
               onTap: () {},
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: Row(
-                  children: const [
-                    Text(
-                      'Confirmar pedido',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Icon(Icons.save),
-                  ],
+                child: GestureDetector(
+                  onTap: () {
+                    bloc.add(MenuCartSendOrder());
+                  },
+                  child: Row(
+                    children: const [
+                      Text(
+                        'Confirmar pedido',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Icon(Icons.save),
+                    ],
+                  ),
                 ),
               ),
             ),
           ],
         ),
-        body: BlocBuilder(
+        body: BlocBuilder<MenuCartBloc, MenuCartStates>(
           bloc: bloc,
           builder: (context, state) {
             if (state is MenuCartLoadingState) {
@@ -71,7 +82,7 @@ class _MenuCartState extends State<MenuCart> {
                       size: 100,
                     ),
                     Text(
-                      state.error.message,
+                      state.menuCartError?.message ?? '',
                       style: const TextStyle(fontSize: 50),
                     ),
                   ],
@@ -79,7 +90,7 @@ class _MenuCartState extends State<MenuCart> {
               );
             }
 
-            if (state is MenuCartSuccessState) {
+            if (state is MenuCartGetMenuListSuccessState) {
               final menuItemCartList = state.menuItemCartList;
 
               if (menuItemCartList.isEmpty) {
@@ -114,6 +125,14 @@ class _MenuCartState extends State<MenuCart> {
                   );
                 },
               );
+            }
+
+            if (state is MenuCartSendOrderSuccessState) {
+              orderCompletedAnimationController.forward();
+
+              return Center(
+                  child: Lottie.asset('assets/lottie/order-complete.json',
+                      controller: orderCompletedAnimationController));
             }
 
             return Container();
