@@ -23,4 +23,9 @@ class LoginUsecaseImpl implements ILoginUsecase {
 
     return _repository.login(email, password);
   }
+
+  @override
+  Future<Either<LoginError, User>> getLoggedUser() async {
+    return _repository.getLoggedUser();
+  }
 }
