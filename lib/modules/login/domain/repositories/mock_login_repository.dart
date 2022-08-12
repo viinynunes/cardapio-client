@@ -14,4 +14,14 @@ class MockLoginRepository implements ILoginRepository {
 
     /*return Left(LoginError('Usuario ou senha invalido'));*/
   }
+
+  @override
+  Future<Either<LoginError, User>> getLoggedUser() async {
+    await Future.delayed(const Duration(seconds: 2));
+
+    return Right(User(
+        name: 'Vinicius Nunes', email: 'viny@gmail.com', phone: '19981436342'));
+
+    /*return Left(LoginError('Usuario ou senha invalido'));*/
+  }
 }
