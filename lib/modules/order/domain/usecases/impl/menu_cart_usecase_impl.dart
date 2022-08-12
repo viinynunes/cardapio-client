@@ -1,6 +1,5 @@
 import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
 import 'package:cardapio/modules/order/domain/repositories/i_menu_cart_repository.dart';
-
 import 'package:dartz/dartz.dart';
 
 import '../../../../errors/errors.dart';
@@ -12,8 +11,11 @@ class MenuCartUsecaseImpl implements IMenuCartUsecase {
   MenuCartUsecaseImpl(this._repository);
 
   @override
-  Future<Either<MenuCartError, ItemMenu>> addItemToCart(ItemMenu itemMenu) async {
-    if (itemMenu.name.isEmpty || itemMenu.description.isEmpty || itemMenu.imgUrl.isEmpty){
+  Future<Either<MenuCartError, ItemMenu>> addItemToCart(
+      ItemMenu itemMenu) async {
+    if (itemMenu.name.isEmpty ||
+        itemMenu.description.isEmpty ||
+        itemMenu.imgUrl.isEmpty) {
       return Left(MenuCartError('Invalid item menu'));
     }
 
@@ -28,6 +30,11 @@ class MenuCartUsecaseImpl implements IMenuCartUsecase {
     }
 
     return await _repository.removeItemFromCart(itemMenu);
+  }
+
+  @override
+  Future<Either<MenuCartError, bool>> clearMenuCartList() async {
+    return await _repository.clearMenuCartList();
   }
 
   @override
