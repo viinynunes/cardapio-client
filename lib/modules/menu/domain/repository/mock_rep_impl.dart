@@ -39,22 +39,22 @@ class MockRepImpl implements IItemMenuRepository {
   }
 }
 
-class MockRepMenuCartImpl implements IMenuCartRepository {
-  List<ItemMenu> cartItemMenuList = [];
+class MockMenuCartRepositoryImpl implements IMenuCartRepository {
+  List<ItemMenu> menuCartList = [];
 
-  static final MockRepMenuCartImpl _mockMenuRep =
-      MockRepMenuCartImpl._internal();
+  static final MockMenuCartRepositoryImpl _mockMenuRep =
+      MockMenuCartRepositoryImpl._internal();
 
-  factory MockRepMenuCartImpl() {
+  factory MockMenuCartRepositoryImpl() {
     return _mockMenuRep;
   }
 
-  MockRepMenuCartImpl._internal();
+  MockMenuCartRepositoryImpl._internal();
 
   @override
   Future<Either<MenuCartError, ItemMenu>> addItemToCart(
       ItemMenu itemMenu) async {
-    cartItemMenuList.add(itemMenu);
+    menuCartList.add(itemMenu);
 
     return Right(itemMenu);
   }
@@ -62,7 +62,7 @@ class MockRepMenuCartImpl implements IMenuCartRepository {
   @override
   Future<Either<MenuCartError, bool>> removeItemFromCart(
       ItemMenu itemMenu) async {
-    final result = cartItemMenuList.remove(itemMenu);
+    final result = menuCartList.remove(itemMenu);
 
     if (result == false) {
       return Left(MenuCartError('Error removing item menu from cart'));
@@ -72,7 +72,14 @@ class MockRepMenuCartImpl implements IMenuCartRepository {
   }
 
   @override
+  Future<Either<MenuCartError, bool>> clearMenuCartList() async {
+    menuCartList.clear();
+
+    return const Right(true);
+  }
+
+  @override
   Future<Either<MenuCartError, List<ItemMenu>>> getMenuCartList() async {
-    return Right(cartItemMenuList);
+    return Right(menuCartList);
   }
 }
