@@ -62,7 +62,7 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage>
           ),
           GestureDetector(
               onTap: () async {
-                await Modular.to.pushNamed('/order/');
+                await Modular.to.pushNamed('/order/cart');
 
                 bloc.add(MenuByDayItemGetMenuCartEvent());
               },
