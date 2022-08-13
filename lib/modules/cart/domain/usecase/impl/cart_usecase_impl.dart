@@ -1,44 +1,44 @@
 import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
-import 'package:cardapio/modules/order/domain/repositories/i_menu_cart_repository.dart';
+import 'package:cardapio/modules/cart/domain/repositories/i_cart_repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../../errors/errors.dart';
-import '../i_menu_cart_usecase.dart';
+import '../i_cart_usecase.dart';
 
-class MenuCartUsecaseImpl implements IMenuCartUsecase {
-  final IMenuCartRepository _repository;
+class CartUsecaseImpl implements ICartUsecase {
+  final ICartRepository _repository;
 
-  MenuCartUsecaseImpl(this._repository);
+  CartUsecaseImpl(this._repository);
 
   @override
-  Future<Either<MenuCartError, ItemMenu>> addItemToCart(
+  Future<Either<CartError, ItemMenu>> addItemToCart(
       ItemMenu itemMenu) async {
     if (itemMenu.name.isEmpty ||
         itemMenu.description.isEmpty ||
         itemMenu.imgUrl.isEmpty) {
-      return Left(MenuCartError('Invalid item menu'));
+      return Left(CartError('Invalid item menu'));
     }
 
     return _repository.addItemToCart(itemMenu);
   }
 
   @override
-  Future<Either<MenuCartError, bool>> removeItemFromCart(
+  Future<Either<CartError, bool>> removeItemFromCart(
       ItemMenu itemMenu) async {
     if (itemMenu.name.isEmpty) {
-      return Left(MenuCartError('Invalid menu item'));
+      return Left(CartError('Invalid menu item'));
     }
 
     return await _repository.removeItemFromCart(itemMenu);
   }
 
   @override
-  Future<Either<MenuCartError, bool>> clearMenuCartList() async {
+  Future<Either<CartError, bool>> clearMenuCartList() async {
     return await _repository.clearMenuCartList();
   }
 
   @override
-  Future<Either<MenuCartError, List<ItemMenu>>> getMenuCartList() async {
+  Future<Either<CartError, List<ItemMenu>>> getMenuCartList() async {
     return await _repository.getMenuCartList();
   }
 }

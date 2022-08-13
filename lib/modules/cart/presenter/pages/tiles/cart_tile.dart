@@ -1,8 +1,8 @@
 import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
 import 'package:flutter/material.dart';
 
-class MenuCartTile extends StatelessWidget {
-  const MenuCartTile({Key? key, required this.item, required this.removeItemButtonAction}) : super(key: key);
+class CartTile extends StatelessWidget {
+  const CartTile({Key? key, required this.item, required this.removeItemButtonAction}) : super(key: key);
 
   final ItemMenu item;
   final VoidCallback removeItemButtonAction;

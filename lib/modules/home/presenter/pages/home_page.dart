@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Modular.to.pushNamed('./order/cart');
+                Modular.to.pushNamed('/cart/');
               },
               icon: const Icon(Icons.shopping_cart_outlined))
         ],

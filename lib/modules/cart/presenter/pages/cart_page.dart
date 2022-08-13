@@ -1,26 +1,26 @@
-import 'package:cardapio/modules/order/presenter/bloc/events/menu_cart_events.dart';
+import 'package:cardapio/modules/cart/presenter/bloc/events/cart_events.dart';
 import 'package:cardapio/modules/order/presenter/bloc/events/order_events.dart';
-import 'package:cardapio/modules/order/presenter/bloc/menu_cart_bloc.dart';
-import 'package:cardapio/modules/order/presenter/bloc/states/menu_cart_states.dart';
+import 'package:cardapio/modules/cart/presenter/bloc/cart_bloc.dart';
+import 'package:cardapio/modules/cart/presenter/bloc/states/cart_states.dart';
 import 'package:cardapio/modules/order/presenter/bloc/states/order_states.dart';
-import 'package:cardapio/modules/order/presenter/pages/tiles/menu_cart_tile.dart';
+import 'package:cardapio/modules/cart/presenter/pages/tiles/cart_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:lottie/lottie.dart';
 
-import '../bloc/order_bloc.dart';
+import '../../../order/presenter/bloc/order_bloc.dart';
 
-class MenuCartPage extends StatefulWidget {
-  const MenuCartPage({Key? key}) : super(key: key);
+class CartPage extends StatefulWidget {
+  const CartPage({Key? key}) : super(key: key);
 
   @override
-  State<MenuCartPage> createState() => _MenuCartPageState();
+  State<CartPage> createState() => _CartPageState();
 }
 
-class _MenuCartPageState extends State<MenuCartPage>
+class _CartPageState extends State<CartPage>
     with TickerProviderStateMixin {
-  final menuCartBloc = Modular.get<MenuCartBloc>();
+  final menuCartBloc = Modular.get<CartBloc>();
   final orderBloc = Modular.get<OrderBloc>();
   late final AnimationController orderCompletedAnimationController;
   late final AnimationController orderLoadingAnimationController;
@@ -53,7 +53,7 @@ class _MenuCartPageState extends State<MenuCartPage>
     return MultiBlocProvider(
       providers: [
         BlocProvider<OrderBloc>(create: (context) => orderBloc),
-        BlocProvider<MenuCartBloc>(create: (context) => menuCartBloc),
+        BlocProvider<CartBloc>(create: (context) => menuCartBloc),
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -86,15 +86,15 @@ class _MenuCartPageState extends State<MenuCartPage>
           child: Center(
             child: Stack(
               children: [
-                BlocBuilder<MenuCartBloc, MenuCartStates>(
+                BlocBuilder<CartBloc, CartStates>(
                   bloc: menuCartBloc,
                   builder: (context, state) {
-                    if (state is MenuCartLoadingState) {
+                    if (state is CartLoadingState) {
                       return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
-                    if (state is MenuCartErrorState) {
+                    if (state is CartErrorState) {
                       return Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +112,7 @@ class _MenuCartPageState extends State<MenuCartPage>
                       );
                     }
 
-                    if (state is MenuCartSuccessState) {
+                    if (state is CartSuccessState) {
                       final menuItemCartList = state.menuItemCartList;
 
                       if (menuItemCartList.isEmpty) {
@@ -141,7 +141,7 @@ class _MenuCartPageState extends State<MenuCartPage>
                         itemBuilder: (context, index) {
                           var item = menuItemCartList[index];
 
-                          return MenuCartTile(
+                          return CartTile(
                             item: item,
                             removeItemButtonAction: () {
                               menuCartBloc.add(RemoveItemMenuFromCart(item));

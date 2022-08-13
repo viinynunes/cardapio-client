@@ -16,7 +16,7 @@ class MenuByDayItemSuccessState extends MenuByDayItemStates {
 }
 
 class MenuByDayItemErrorState extends MenuByDayItemStates {
-  final MenuCartError error;
+  final CartError error;
 
   MenuByDayItemErrorState({required this.error});
 }

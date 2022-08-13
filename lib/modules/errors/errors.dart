@@ -10,10 +10,10 @@ class GetDaysOfWeekError implements Exception {
   GetDaysOfWeekError(this.message);
 }
 
-class MenuCartError implements Exception {
+class CartError implements Exception {
   String message;
 
-  MenuCartError(this.message);
+  CartError(this.message);
 }
 
 class LoginError implements Exception {

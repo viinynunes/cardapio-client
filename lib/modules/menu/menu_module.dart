@@ -7,7 +7,7 @@ import 'package:cardapio/modules/menu/presenter/bloc/menu_by_day_item_bloc.dart'
 import 'package:cardapio/modules/menu/presenter/pages/days_of_week_page.dart';
 import 'package:cardapio/modules/menu/presenter/pages/menu_by_day_item_page.dart';
 import 'package:cardapio/modules/menu/presenter/pages/menu_by_day_page.dart';
-import 'package:cardapio/modules/order/domain/usecases/impl/menu_cart_usecase_impl.dart';
+import 'package:cardapio/modules/cart/domain/usecase/impl/cart_usecase_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class MenuModule extends Module {
@@ -19,7 +19,7 @@ class MenuModule extends Module {
         Bind.factory((i) => ItemMenuUsecaseImpl(i())),
         Bind.singleton((i) => MenuByDayBloc(i())),
         Bind.factory((i) => MockMenuCartRepositoryImpl()),
-        Bind.factory((i) => MenuCartUsecaseImpl(i())),
+        Bind.factory((i) => CartUsecaseImpl(i())),
         Bind.singleton((i) => MenuByDayItemBloc(i())),
       ];
 

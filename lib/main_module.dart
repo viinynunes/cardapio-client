@@ -1,3 +1,4 @@
+import 'package:cardapio/modules/cart/cart_module.dart';
 import 'package:cardapio/modules/login/login_module.dart';
 import 'package:cardapio/modules/order/order_module.dart';
 import 'package:cardapio/modules/menu/menu_module.dart';
@@ -16,5 +17,6 @@ class MainModule extends Module {
         ModuleRoute('/login/', module: LoginModule()),
         ModuleRoute('/menu', module: MenuModule()),
         ModuleRoute('/order/', module: OrderModule()),
+        ModuleRoute('/cart/', module: CartModule()),
       ];
 }
