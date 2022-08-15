@@ -168,7 +168,7 @@ class _CartPageState extends State<CartPage>
                       );
                     }
 
-                    if (state is OrderSuccessState) {
+                    if (state is OrderSendOrderSuccessState) {
                       menuCartBloc.add(GetMenuCartList());
                       orderCompletedAnimationController.forward();
 
