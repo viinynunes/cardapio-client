@@ -1,0 +1,58 @@
+import 'package:cardapio/modules/order/domain/entities/enums/order_status_enum.dart';
+import 'package:cardapio/modules/order/domain/entities/order.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+class PersonalOrdersTile extends StatelessWidget {
+  const PersonalOrdersTile({Key? key, required this.order}) : super(key: key);
+
+  final Order order;
+
+  @override
+  Widget build(BuildContext context) {
+    final dateFormat = DateFormat('dd/MM/yyyy');
+    final size = MediaQuery.of(context).size;
+
+    return Container(
+      height: size.height * 0.1,
+      decoration: BoxDecoration(
+        color: Colors.grey.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Card(
+        child: Row(
+          children: [
+            Flexible(
+              flex: 1,
+              fit: FlexFit.tight,
+              child: Text(
+                dateFormat.format(order.registrationDate),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Flexible(
+              flex: 3,
+              fit: FlexFit.tight,
+              child: Text(
+                order.menuList.first.name,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              fit: FlexFit.tight,
+              child: Text(
+                order.status.name,
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                    color: order.status.name == OrderStatus.cancelled.name
+                        ? Colors.red
+                        : Colors.green),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
