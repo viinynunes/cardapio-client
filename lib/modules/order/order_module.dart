@@ -4,6 +4,7 @@ import 'package:cardapio/modules/login/domain/usecases/impl/login_usecase_impl.d
 import 'package:cardapio/modules/order/domain/usecases/impl/order_usecase_impl.dart';
 import 'package:cardapio/modules/order/infra/repositories/mockOrderRepositoryImpl.dart';
 import 'package:cardapio/modules/order/presenter/bloc/order_bloc.dart';
+import 'package:cardapio/modules/order/presenter/pages/personal_order_item.dart';
 import 'package:cardapio/modules/order/presenter/pages/personal_orders.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -26,5 +27,9 @@ class OrderModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (_, __) => const PersonalOrders()),
+        ChildRoute('/order-item/',
+            child: (_, args) => PersonalOrderItem(
+                  order: args.data[0],
+                ))
       ];
 }
