@@ -1,6 +1,7 @@
 import 'package:cardapio/modules/order/presenter/bloc/events/order_events.dart';
 import 'package:cardapio/modules/order/presenter/bloc/order_bloc.dart';
 import 'package:cardapio/modules/order/presenter/bloc/states/order_states.dart';
+import 'package:cardapio/modules/order/presenter/pages/tiles/personal_orders_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -24,7 +25,7 @@ class _PersonalOrdersState extends State<PersonalOrders>
   void initState() {
     super.initState();
 
-    bloc.add(GetOrderEvent());
+    bloc.add(GetOrdersEvent());
 
     orderCancelConfirmedAniController = AnimationController(vsync: this);
     orderCancelConfirmedAniController.duration = const Duration(seconds: 2);
@@ -56,7 +57,20 @@ class _PersonalOrdersState extends State<PersonalOrders>
             );
           }
 
-          if (state is OrderGetListSuccessState) {}
+          if (state is OrderGetListSuccessState) {
+            final orderList = state.orderList;
+
+            return SafeArea(
+              child: ListView.builder(
+                itemCount: orderList.length,
+                itemBuilder: (context, index) {
+                  var order = orderList[index];
+
+                  return PersonalOrdersTile(order: order);
+                },
+              ),
+            );
+          }
 
           if (state is OrderSuccessState) {
             orderCancelConfirmedAniController.forward();
