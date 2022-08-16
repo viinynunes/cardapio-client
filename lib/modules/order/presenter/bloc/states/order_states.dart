@@ -7,10 +7,18 @@ class OrderIdleState extends OrderStates {}
 
 class OrderLoadingState extends OrderStates {}
 
-class OrderSuccessState extends OrderStates {
+class OrderSuccessState extends OrderStates {}
+
+class OrderSendOrderSuccessState implements OrderSuccessState {
   final Order order;
 
-  OrderSuccessState(this.order);
+  OrderSendOrderSuccessState(this.order);
+}
+
+class OrderGetListSuccessState extends OrderStates {
+  final List<Order> orderList;
+
+  OrderGetListSuccessState(this.orderList);
 }
 
 class OrderErrorState extends OrderStates {
