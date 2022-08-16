@@ -18,8 +18,11 @@ class HomeTile extends StatelessWidget {
       child: Container(
         height: size.height * 0.15,
         width: double.maxFinite,
-        color: Colors.grey.withOpacity(0.3),
         padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.grey.withOpacity(0.3),
+          borderRadius: BorderRadius.circular(16),
+        ),
         child: Row(
           children: [
             Flexible(
