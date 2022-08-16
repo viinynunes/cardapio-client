@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                                     content: Text('Login Efetuado com sucesso'),
                                   ),
                                 );
-                                Modular.to.navigate('/android-home');
+                                Modular.to.navigate('/home');
                               }
                             },
                             child: BlocBuilder<LoginBloc, LoginStates>(
