@@ -1,4 +1,5 @@
 import 'package:cardapio/modules/errors/errors.dart';
+import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
 import 'package:cardapio/modules/order/domain/entities/enums/order_status_enum.dart';
 import 'package:cardapio/modules/order/domain/repositories/i_order_repository.dart';
 import 'package:dartz/dartz.dart';
@@ -32,31 +33,66 @@ class MockOrderRepositoryImpl implements IOrderRepository {
       order.Order(
           id: 'id',
           user: user,
-          menuList: [],
+          menuList: [
+            ItemMenu(
+                name: 'Farofa Mineira com suco',
+                description:
+                    'farofa feita com farinha, calabresa e bacon e suco de laranja natural',
+                imgUrl: 'imgUrl',
+                weekdayList: []),
+          ],
           registrationDate: DateTime.now(),
           status: OrderStatus.open),
       order.Order(
           id: 'id',
           user: user,
-          menuList: [],
+          menuList: [
+            ItemMenu(
+                name: 'Farofa Mineira com suco',
+                description:
+                    'farofa feita com farinha, calabresa e bacon e suco de laranja natural',
+                imgUrl: 'imgUrl',
+                weekdayList: []),
+          ],
           registrationDate: DateTime.now(),
           status: OrderStatus.confirmed),
       order.Order(
           id: 'id',
           user: user,
-          menuList: [],
+          menuList: [
+            ItemMenu(
+                name: 'Farofa Mineira com suco',
+                description:
+                    'farofa feita com farinha, calabresa e bacon e suco de laranja natural',
+                imgUrl: 'imgUrl',
+                weekdayList: []),
+          ],
           registrationDate: DateTime.now(),
           status: OrderStatus.cancelled),
       order.Order(
           id: 'id',
           user: user,
-          menuList: [],
+          menuList: [
+            ItemMenu(
+                name: 'Farofa Mineira com suco',
+                description:
+                    'farofa feita com farinha, calabresa e bacon e suco de laranja natural',
+                imgUrl: 'imgUrl',
+                weekdayList: []),
+          ],
           registrationDate: DateTime.now(),
           status: OrderStatus.closed),
       order.Order(
           id: 'id',
           user: user,
-          menuList: [],
+          menuList: [
+            ItemMenu(
+                name: 'Farofa Mineira com suco',
+                description:
+                    'farofa feita com farinha, calabresa e bacon e suco de laranja natural',
+                imgUrl: 'imgUrl',
+                weekdayList: []),
+          ],
           registrationDate: DateTime.now(),
           status: OrderStatus.closed),
     ]);
