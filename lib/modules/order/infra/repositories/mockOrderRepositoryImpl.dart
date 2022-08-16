@@ -31,70 +31,74 @@ class MockOrderRepositoryImpl implements IOrderRepository {
 
     return Right([
       order.Order(
-          id: 'id',
+          id: '125',
           user: user,
           menuList: [
-            ItemMenu(
-                name: 'Farofa Mineira com suco',
-                description:
-                    'farofa feita com farinha, calabresa e bacon e suco de laranja natural',
-                imgUrl: 'imgUrl',
-                weekdayList: []),
+            _getItemMenu(),
+            _getItemMenu(),
           ],
           registrationDate: DateTime.now(),
           status: OrderStatus.open),
       order.Order(
-          id: 'id',
+          id: '126',
           user: user,
           menuList: [
-            ItemMenu(
-                name: 'Farofa Mineira com suco',
-                description:
-                    'farofa feita com farinha, calabresa e bacon e suco de laranja natural',
-                imgUrl: 'imgUrl',
-                weekdayList: []),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
           ],
           registrationDate: DateTime.now(),
           status: OrderStatus.confirmed),
       order.Order(
-          id: 'id',
+          id: '127',
           user: user,
           menuList: [
-            ItemMenu(
-                name: 'Farofa Mineira com suco',
-                description:
-                    'farofa feita com farinha, calabresa e bacon e suco de laranja natural',
-                imgUrl: 'imgUrl',
-                weekdayList: []),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
           ],
           registrationDate: DateTime.now(),
           status: OrderStatus.cancelled),
       order.Order(
-          id: 'id',
+          id: '128',
           user: user,
           menuList: [
-            ItemMenu(
-                name: 'Farofa Mineira com suco',
-                description:
-                    'farofa feita com farinha, calabresa e bacon e suco de laranja natural',
-                imgUrl: 'imgUrl',
-                weekdayList: []),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
           ],
           registrationDate: DateTime.now(),
           status: OrderStatus.closed),
       order.Order(
-          id: 'id',
+          id: '129',
           user: user,
           menuList: [
-            ItemMenu(
-                name: 'Farofa Mineira com suco',
-                description:
-                    'farofa feita com farinha, calabresa e bacon e suco de laranja natural',
-                imgUrl: 'imgUrl',
-                weekdayList: []),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
+            _getItemMenu(),
           ],
           registrationDate: DateTime.now(),
           status: OrderStatus.closed),
     ]);
+  }
+
+  _getItemMenu() {
+    return ItemMenu(
+        name: 'Farofa Mineira com suco',
+        description:
+            'farofa feita com farinha, calabresa e bacon e suco de laranja natural',
+        imgUrl: 'https://portal.fgv.br/sites/portal.fgv.br/files/'
+            'styles/noticia_geral/public/noticias/set/17/'
+            'prato-feito.jpg?itok=klqGuxxN&c=33313733cdad61e4bd51beabb4a84531',
+        weekdayList: []);
   }
 }
