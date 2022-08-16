@@ -56,6 +56,22 @@ class OrderBloc extends Bloc<OrderEvents, OrderStates> {
       }
     });
 
+    on<GetOrdersEvent>((event, emit) async {
+      emit(OrderLoadingState());
+
+      late final User user;
+
+      final userResult = await loginUsecase.getLoggedUser();
+
+      userResult.fold(
+          (l) => emit(OrderErrorState(OrderError(l.message))), (r) => user = r);
+
+      final result = await orderUsecase.getOrders(user);
+
+      result.fold((l) => emit(OrderErrorState(l)),
+          (r) => emit(OrderGetListSuccessState(r)));
+    });
+
     on<CancelOrderEvent>((event, emit) async {
       emit(OrderLoadingState());
 
