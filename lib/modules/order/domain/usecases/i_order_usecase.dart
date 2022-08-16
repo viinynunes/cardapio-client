@@ -9,5 +9,5 @@ abstract class IOrderUsecase {
 
   Future<Either<OrderError, order.Order>> cancel(order.Order order);
 
-  Future<Either<OrderError, order.Order>> getOrders(User user);
+  Future<Either<OrderError, List<order.Order>>> getOrders(User user);
 }

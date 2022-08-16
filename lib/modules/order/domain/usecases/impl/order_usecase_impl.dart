@@ -38,7 +38,7 @@ class OrderUsecaseImpl implements IOrderUsecase {
   }
 
   @override
-  Future<Either<OrderError, order.Order>> getOrders(User user) async {
+  Future<Either<OrderError, List<order.Order>>> getOrders(User user) async {
     if (user.email.isEmpty) {
       return Left(OrderError('Invalid user'));
     }
