@@ -47,6 +47,14 @@ class _PersonalOrdersState extends State<PersonalOrders>
       appBar: AppBar(
         title: const Text('Meus Pedidos'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Modular.to.pushNamed('/cart/');
+            },
+            icon: const Icon(Icons.shopping_cart_outlined),
+          ),
+        ],
       ),
       body: BlocBuilder<OrderBloc, OrderStates>(
         bloc: bloc,
@@ -66,7 +74,10 @@ class _PersonalOrdersState extends State<PersonalOrders>
                 itemBuilder: (context, index) {
                   var order = orderList[index];
 
-                  return PersonalOrdersTile(order: order);
+                  return PersonalOrdersTile(
+                    order: order,
+                    onTap: () {},
+                  );
                 },
               ),
             );
