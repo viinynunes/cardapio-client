@@ -3,6 +3,7 @@ import 'package:cardapio/modules/order/domain/repositories/i_order_repository.da
 import 'package:cardapio/modules/order/domain/usecases/i_order_usecase.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../../../login/domain/entities/user.dart';
 import '../../entities/order.dart' as order;
 
 class OrderUsecaseImpl implements IOrderUsecase {
@@ -34,5 +35,14 @@ class OrderUsecaseImpl implements IOrderUsecase {
     }
 
     return _repository.cancel(order);
+  }
+
+  @override
+  Future<Either<OrderError, order.Order>> getOrders(User user) async {
+    if (user.email.isEmpty) {
+      return Left(OrderError('Invalid user'));
+    }
+
+    return _repository.getOrders(user);
   }
 }
