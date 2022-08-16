@@ -5,7 +5,6 @@ import 'package:cardapio/modules/order/presenter/pages/tiles/personal_orders_til
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:lottie/lottie.dart';
 
 class PersonalOrders extends StatefulWidget {
   const PersonalOrders({Key? key}) : super(key: key);
@@ -18,27 +17,11 @@ class _PersonalOrdersState extends State<PersonalOrders>
     with TickerProviderStateMixin {
   final bloc = Modular.get<OrderBloc>();
 
-  late final AnimationController orderCancelConfirmedAniController;
-  late final AnimationController orderCancelFailedAniController;
-
   @override
   void initState() {
     super.initState();
 
     bloc.add(GetOrdersEvent());
-
-    orderCancelConfirmedAniController = AnimationController(vsync: this);
-    orderCancelConfirmedAniController.duration = const Duration(seconds: 2);
-
-    orderCancelFailedAniController = AnimationController(vsync: this);
-    orderCancelFailedAniController.duration = const Duration(seconds: 2);
-  }
-
-  @override
-  void dispose() {
-    orderCancelFailedAniController.dispose();
-    orderCancelConfirmedAniController.dispose();
-    super.dispose();
   }
 
   @override
@@ -76,43 +59,23 @@ class _PersonalOrdersState extends State<PersonalOrders>
 
                   return PersonalOrdersTile(
                     order: order,
-                    onTap: () {},
+                    onTap: () async {
+                      final eventPressed = await Modular.to
+                          .pushNamed('./order-item', arguments: [order]);
+                      eventPressed == true ? bloc.add(GetOrdersEvent()) : null;
+                      //bloc.add(GetOrdersEvent());
+                    },
                   );
                 },
               ),
             );
           }
 
-          if (state is OrderSuccessState) {
-            orderCancelConfirmedAniController.forward();
-
-            return Center(
-              child: Lottie.asset(
-                'assets/lottie/order-cancel-confirmed.json',
-                controller: orderCancelConfirmedAniController,
-              ),
-            );
-          }
-
           if (state is OrderErrorState) {
-            orderCancelFailedAniController.forward();
-
             return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Lottie.asset(
-                    'assets/lottie/order-cancel-failed.json',
-                    controller: orderCancelFailedAniController,
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    state.orderError.message,
-                    style: const TextStyle(fontSize: 25),
-                  ),
-                ],
+              child: Text(
+                state.orderError.message,
+                style: const TextStyle(fontSize: 25),
               ),
             );
           }
