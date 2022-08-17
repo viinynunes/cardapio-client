@@ -19,7 +19,7 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
-  final menuCartBloc = Modular.get<CartBloc>();
+  final cartBloc = Modular.get<CartBloc>();
   final orderBloc = Modular.get<OrderBloc>();
   late final AnimationController orderCompletedAnimationController;
   late final AnimationController orderLoadingAnimationController;
@@ -28,7 +28,7 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    menuCartBloc.add(GetMenuCartList());
+    cartBloc.add(GetMenuCartList());
 
     orderCompletedAnimationController = AnimationController(vsync: this);
     orderCompletedAnimationController.duration = const Duration(seconds: 2);
@@ -42,7 +42,7 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
     orderLoadingAnimationController.dispose();
     orderCompletedAnimationController.dispose();
 
-    menuCartBloc.close();
+    cartBloc.close();
     super.dispose();
   }
 
@@ -51,33 +51,41 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
     return MultiBlocProvider(
       providers: [
         BlocProvider<OrderBloc>(create: (context) => orderBloc),
-        BlocProvider<CartBloc>(create: (context) => menuCartBloc),
+        BlocProvider<CartBloc>(create: (context) => cartBloc),
       ],
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Carrinho'),
           centerTitle: true,
           actions: [
-            GestureDetector(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: GestureDetector(
-                  onTap: () {
-                    orderBloc.add(SendOrderEvent());
-                  },
-                  child: Row(
-                    children: const [
-                      Text(
-                        'Confirmar pedido',
-                        style: TextStyle(color: Colors.white),
+            BlocBuilder<CartBloc, CartStates>(
+              bloc: cartBloc,
+              builder: (_, state) {
+                if (state is CartSuccessState) {
+                  if (state.menuItemCartList.isNotEmpty) {
+                    return GestureDetector(
+                      onTap: () {
+                        orderBloc.add(SendOrderEvent());
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Row(
+                          children: const [
+                            Text(
+                              'Confirmar pedido',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Icon(Icons.save),
+                          ],
+                        ),
                       ),
-                      Icon(Icons.save),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+                    );
+                  }
+                }
+
+                return Container();
+              },
+            )
           ],
         ),
         body: SafeArea(
@@ -85,7 +93,7 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
             child: Stack(
               children: [
                 BlocBuilder<CartBloc, CartStates>(
-                  bloc: menuCartBloc,
+                  bloc: cartBloc,
                   builder: (context, state) {
                     if (state is CartLoadingState) {
                       return const Center(
@@ -142,8 +150,8 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
                           return CartTile(
                             item: item,
                             removeItemButtonAction: () {
-                              menuCartBloc.add(RemoveItemMenuFromCart(item));
-                              menuCartBloc.add(GetMenuCartList());
+                              cartBloc.add(RemoveItemMenuFromCart(item));
+                              cartBloc.add(GetMenuCartList());
                             },
                           );
                         },
