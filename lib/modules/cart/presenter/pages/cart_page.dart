@@ -1,9 +1,9 @@
-import 'package:cardapio/modules/cart/presenter/bloc/events/cart_events.dart';
-import 'package:cardapio/modules/order/presenter/bloc/events/order_events.dart';
 import 'package:cardapio/modules/cart/presenter/bloc/cart_bloc.dart';
+import 'package:cardapio/modules/cart/presenter/bloc/events/cart_events.dart';
 import 'package:cardapio/modules/cart/presenter/bloc/states/cart_states.dart';
-import 'package:cardapio/modules/order/presenter/bloc/states/order_states.dart';
 import 'package:cardapio/modules/cart/presenter/pages/tiles/cart_tile.dart';
+import 'package:cardapio/modules/order/presenter/bloc/events/order_events.dart';
+import 'package:cardapio/modules/order/presenter/bloc/states/order_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -18,8 +18,7 @@ class CartPage extends StatefulWidget {
   State<CartPage> createState() => _CartPageState();
 }
 
-class _CartPageState extends State<CartPage>
-    with TickerProviderStateMixin {
+class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
   final menuCartBloc = Modular.get<CartBloc>();
   final orderBloc = Modular.get<OrderBloc>();
   late final AnimationController orderCompletedAnimationController;
@@ -40,7 +39,6 @@ class _CartPageState extends State<CartPage>
 
   @override
   void dispose() {
-
     orderLoadingAnimationController.dispose();
     orderCompletedAnimationController.dispose();
 
@@ -169,7 +167,14 @@ class _CartPageState extends State<CartPage>
                     }
 
                     if (state is OrderSendOrderSuccessState) {
-                      menuCartBloc.add(GetMenuCartList());
+                      orderCompletedAnimationController.addStatusListener(
+                        (status) {
+                          status == AnimationStatus.completed
+                              ? Modular.to.pushNamed('/order/')
+                              : null;
+                        },
+                      );
+
                       orderCompletedAnimationController.forward();
 
                       return Scaffold(
