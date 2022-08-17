@@ -4,7 +4,7 @@ import 'package:cardapio/modules/login/domain/usecases/i_login_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:string_validator/string_validator.dart';
 
-import '../../../../errors/errors.dart';
+import '../../../errors/login_errors.dart';
 
 class LoginUsecaseImpl implements ILoginUsecase {
   final ILoginRepository _repository;

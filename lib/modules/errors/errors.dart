@@ -16,11 +16,7 @@ class CartError implements Exception {
   CartError(this.message);
 }
 
-class LoginError implements Exception {
-  String message;
 
-  LoginError(this.message);
-}
 
 class OrderError implements Exception {
   String message;

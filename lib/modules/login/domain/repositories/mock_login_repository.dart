@@ -2,7 +2,7 @@ import 'package:cardapio/modules/login/domain/entities/user.dart';
 import 'package:cardapio/modules/login/domain/repositories/i_login_repository.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../../errors/errors.dart';
+import '../../errors/login_errors.dart';
 
 class MockLoginRepository implements ILoginRepository {
   @override
