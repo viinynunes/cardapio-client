@@ -4,7 +4,7 @@ import '../../errors/login_errors.dart';
 import '../entities/user.dart';
 
 abstract class ILoggedUserRepository {
-  Future<Either<LoginError, bool>> logout();
+  Future<Either<LoggedUserError, bool>> logout();
 
-  Future<Either<LoginError, User>> getLoggedUser();
+  Future<Either<LoggedUserError, User>> getLoggedUser();
 }

@@ -11,12 +11,12 @@ class LoggedUserUsecaseImpl implements ILoggedUserUsecase {
   LoggedUserUsecaseImpl(this._repository);
 
   @override
-  Future<Either<LoginError, User>> getLoggedUser() async {
+  Future<Either<LoggedUserError, User>> getLoggedUser() async {
     return _repository.getLoggedUser();
   }
 
   @override
-  Future<Either<LoginError, bool>> logout() {
+  Future<Either<LoggedUserError, bool>> logout() {
     throw UnimplementedError();
   }
 }
