@@ -104,9 +104,10 @@ class _LoginPageState extends State<LoginPage> {
 
                               if (state is LoginSuccessState) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
+                                  SnackBar(
                                     backgroundColor: Colors.blue,
-                                    content: Text('Login Efetuado com sucesso'),
+                                    content:
+                                        Text('Bem-vindo ${state.user.name}!'),
                                   ),
                                 );
                                 Modular.to.navigate('/home');
