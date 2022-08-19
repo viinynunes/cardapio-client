@@ -9,6 +9,9 @@ import 'package:cardapio/modules/order/presenter/pages/personal_orders.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../cart/domain/usecase/impl/cart_usecase_impl.dart';
+import '../login/domain/usecases/impl/logged_user_usecase_impl.dart';
+import '../login/external/impl/hive_datasource.dart';
+import '../login/infra/repositories/logged_user_repository_impl.dart';
 import '../menu/domain/repository/mock_rep_impl.dart';
 
 class OrderModule extends Module {
@@ -16,6 +19,9 @@ class OrderModule extends Module {
   List<Bind> get binds => [
         Bind.factory((i) => MockLoginRepository()),
         Bind.factory((i) => MockMenuCartRepositoryImpl()),
+        Bind.factory((i) => HiveDatasource()),
+        Bind.factory((i) => LoggedUserRepositoryImpl(i())),
+        Bind.factory((i) => LoggedUserUsecaseImpl(i())),
         Bind.factory((i) => CartUsecaseImpl(i())),
         Bind.factory((i) => LoginUsecaseImpl(i())),
         Bind.factory((i) => MockOrderRepositoryImpl()),

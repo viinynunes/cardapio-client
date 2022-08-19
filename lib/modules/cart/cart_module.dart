@@ -1,8 +1,9 @@
 import 'package:cardapio/modules/cart/presenter/pages/cart_page.dart';
+import 'package:cardapio/modules/login/domain/usecases/impl/logged_user_usecase_impl.dart';
+import 'package:cardapio/modules/login/external/impl/hive_datasource.dart';
+import 'package:cardapio/modules/login/infra/repositories/logged_user_repository_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../login/domain/repositories/mock_login_repository.dart';
-import '../login/domain/usecases/impl/login_usecase_impl.dart';
 import '../menu/domain/repository/mock_rep_impl.dart';
 import '../order/domain/usecases/impl/order_usecase_impl.dart';
 import '../order/infra/repositories/mockOrderRepositoryImpl.dart';
@@ -13,8 +14,9 @@ import 'presenter/bloc/cart_bloc.dart';
 class CartModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.factory((i) => MockLoginRepository()),
-        Bind.factory((i) => LoginUsecaseImpl(i())),
+        Bind.factory((i) => HiveDatasource()),
+        Bind.factory((i) => LoggedUserRepositoryImpl(i())),
+        Bind.factory((i) => LoggedUserUsecaseImpl(i())),
         Bind.factory((i) => MockOrderRepositoryImpl()),
         Bind.factory((i) => OrderUsecaseImpl(i())),
         Bind.factory((i) => MockMenuCartRepositoryImpl()),
