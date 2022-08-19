@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:cardapio/modules/errors/errors.dart';
+import 'package:cardapio/modules/login/domain/usecases/i_logged_user_usecase.dart';
 
 import '../../../cart/domain/usecase/i_cart_usecase.dart';
 import '../../../cart/presenter/bloc/cart_bloc.dart';
 import '../../../login/domain/entities/user.dart';
-import '../../../login/domain/usecases/i_login_usecase.dart';
 import '../../../menu/domain/entities/item_menu.dart';
 import '../../domain/entities/enums/order_status_enum.dart';
 import '../../domain/entities/order.dart';
@@ -14,12 +14,12 @@ import 'states/order_states.dart';
 
 class OrderBloc extends Bloc<OrderEvents, OrderStates> {
   final ICartUsecase cartUsecase;
-  final ILoginUsecase loginUsecase;
+  final ILoggedUserUsecase loggedUserUsecase;
   final IOrderUsecase orderUsecase;
   final CartBloc menuCartBLoc;
 
-  OrderBloc(
-      this.cartUsecase, this.loginUsecase, this.orderUsecase, this.menuCartBLoc)
+  OrderBloc(this.cartUsecase, this.loggedUserUsecase, this.orderUsecase,
+      this.menuCartBLoc)
       : super(OrderIdleState()) {
     on<SendOrderEvent>((event, emit) async {
       emit(OrderLoadingState());
@@ -27,7 +27,7 @@ class OrderBloc extends Bloc<OrderEvents, OrderStates> {
       late User? user;
       late List<ItemMenu> menuList = [];
 
-      final userResult = await loginUsecase.getLoggedUser();
+      final userResult = await loggedUserUsecase.getLoggedUser();
 
       userResult.fold(
           (l) => emit(OrderErrorState(OrderError(l.message))), (r) => user = r);
@@ -61,7 +61,7 @@ class OrderBloc extends Bloc<OrderEvents, OrderStates> {
 
       late final User user;
 
-      final userResult = await loginUsecase.getLoggedUser();
+      final userResult = await loggedUserUsecase.getLoggedUser();
 
       userResult.fold(
           (l) => emit(OrderErrorState(OrderError(l.message))), (r) => user = r);

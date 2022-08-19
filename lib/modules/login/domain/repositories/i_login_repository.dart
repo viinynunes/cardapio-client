@@ -5,6 +5,4 @@ import '../../errors/login_errors.dart';
 
 abstract class ILoginRepository {
   Future<Either<LoginError, User>> login(String email, String password);
-
-  Future<Either<LoginError, User>> getLoggedUser();
 }
