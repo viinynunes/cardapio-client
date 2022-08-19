@@ -5,10 +5,10 @@ import 'package:cardapio/modules/login/infra/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class FirebaseDatasource implements ILoginDatasource {
+class LoginFirebaseDatasource implements ILoginDatasource {
   final ILoggedUserDatasource _loggedUserDatasource;
 
-  FirebaseDatasource(this._loggedUserDatasource);
+  LoginFirebaseDatasource(this._loggedUserDatasource);
 
   final _auth = FirebaseAuth.instance;
 

@@ -1,6 +1,6 @@
 import 'package:cardapio/modules/cart/presenter/pages/cart_page.dart';
 import 'package:cardapio/modules/login/domain/usecases/impl/logged_user_usecase_impl.dart';
-import 'package:cardapio/modules/login/external/impl/hive_datasource.dart';
+import 'package:cardapio/modules/login/external/impl/login_hive_datasource.dart';
 import 'package:cardapio/modules/login/infra/repositories/logged_user_repository_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -14,7 +14,7 @@ import 'presenter/bloc/cart_bloc.dart';
 class CartModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.factory((i) => HiveDatasource()),
+        Bind.factory((i) => LoginHiveDatasource()),
         Bind.factory((i) => LoggedUserRepositoryImpl(i())),
         Bind.factory((i) => LoggedUserUsecaseImpl(i())),
         Bind.factory((i) => MockOrderRepositoryImpl()),

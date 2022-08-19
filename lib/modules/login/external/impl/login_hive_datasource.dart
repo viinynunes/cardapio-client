@@ -2,7 +2,7 @@ import 'package:cardapio/modules/login/domain/entities/user.dart';
 import 'package:cardapio/modules/login/infra/datasources/i_logged_user_datasource.dart';
 import 'package:cardapio/modules/login/infra/models/user_model.dart';
 
-class HiveDatasource implements ILoggedUserDatasource {
+class LoginHiveDatasource implements ILoggedUserDatasource {
   @override
   Future<User> getLoggedUser() async {
     await Future.delayed(const Duration(seconds: 2));
