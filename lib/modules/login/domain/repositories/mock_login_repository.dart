@@ -14,4 +14,9 @@ class MockLoginRepository implements ILoginRepository {
 
     /*return Left(LoginError('Usuario ou senha invalido'));*/
   }
+
+  @override
+  Future<Either<LoginError, bool>> logout() {
+    throw UnimplementedError();
+  }
 }

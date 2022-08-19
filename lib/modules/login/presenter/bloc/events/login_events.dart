@@ -5,3 +5,5 @@ class UserLoginEvent implements LoginEvents {
 
   UserLoginEvent(this.email, this.password);
 }
+
+class UserLogoutEvent implements LoginEvents {}

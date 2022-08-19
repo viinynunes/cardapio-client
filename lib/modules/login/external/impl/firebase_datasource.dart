@@ -31,6 +31,19 @@ class FirebaseDatasource implements ILoginDatasource {
     return user;
   }
 
+  @override
+  Future<bool> logout() async {
+    try {
+      await _auth.signOut();
+      _firebaseUser = null;
+      _userData = {};
+
+      return await _loggedUserDatasource.logout();
+    } catch (e) {
+      throw LoginError(e.toString());
+    }
+  }
+
   Future<void> _loadCurrentUser() async {
     _firebaseUser = _auth.currentUser;
 

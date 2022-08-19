@@ -20,4 +20,16 @@ class LoginRepositoryImpl implements ILoginRepository {
       return Left(LoginError(e.toString()));
     }
   }
+
+  @override
+  Future<Either<LoginError, bool>> logout() async {
+    try {
+      final result = await _datasource.logout();
+      return Right(result);
+    } on LoginError catch (e) {
+      return Left(e);
+    } catch (e) {
+      return Left(LoginError(e.toString()));
+    }
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:cardapio/modules/login/domain/entities/user.dart';
+import 'package:cardapio/modules/login/errors/login_errors.dart';
 
 abstract class LoginStates {}
 
@@ -12,8 +13,10 @@ class LoginSuccessState implements LoginStates {
   LoginSuccessState(this.user);
 }
 
-class LoginErrorState implements LoginStates {
-  final String message;
+class LoginLogoutSuccessState implements LoginStates {}
 
-  LoginErrorState(this.message);
+class LoginErrorState implements LoginStates {
+  final LoginError error;
+
+  LoginErrorState(this.error);
 }

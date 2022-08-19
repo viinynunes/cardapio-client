@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     backgroundColor: Colors.red,
-                                    content: Text(state.message),
+                                    content: Text(state.error.message),
                                   ),
                                 );
                               }

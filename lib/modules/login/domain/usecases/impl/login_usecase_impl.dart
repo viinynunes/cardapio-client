@@ -23,4 +23,9 @@ class LoginUsecaseImpl implements ILoginUsecase {
 
     return _repository.login(email, password);
   }
+
+  @override
+  Future<Either<LoginError, bool>> logout() {
+    return _repository.logout();
+  }
 }
