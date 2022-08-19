@@ -41,6 +41,9 @@ dependencies:
   string_validator: any
   intl: any
   lottie: any
+  firebase_core: ^1.21.0
+  firebase_auth: ^3.6.4
+  cloud_firestore: ^3.4.5
 
 dev_dependencies:
   flutter_test:
