@@ -17,7 +17,7 @@ class LoginRepositoryImpl implements ILoginRepository {
     } on LoginError catch (e) {
       return Left(e);
     } catch (e) {
-      return Left(LoginError('Uncaught exception'));
+      return Left(LoginError(e.toString()));
     }
   }
 }
