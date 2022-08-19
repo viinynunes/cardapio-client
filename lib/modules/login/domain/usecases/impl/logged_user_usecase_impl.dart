@@ -17,6 +17,6 @@ class LoggedUserUsecaseImpl implements ILoggedUserUsecase {
 
   @override
   Future<Either<LoggedUserError, bool>> logout() {
-    throw UnimplementedError();
+    return _repository.logout();
   }
 }
