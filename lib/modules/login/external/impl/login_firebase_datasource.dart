@@ -22,6 +22,8 @@ class LoginFirebaseDatasource implements ILoginDatasource {
         .catchError((e) => throw LoginError('Incorrect email or password'));
     _firebaseUser = signInResult.user;
 
+    _userData = {};
+
     await _loadCurrentUser();
 
     final user = await _loggedUserDatasource
@@ -55,6 +57,7 @@ class LoginFirebaseDatasource implements ILoginDatasource {
             .get();
 
         _userData = docUser.data() as Map<String, dynamic>;
+        _userData['id'] = docUser.id;
       }
     }
   }
