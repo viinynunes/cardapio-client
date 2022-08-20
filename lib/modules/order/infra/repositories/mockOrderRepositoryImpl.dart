@@ -93,6 +93,7 @@ class MockOrderRepositoryImpl implements IOrderRepository {
 
   _getItemMenu() {
     return ItemMenu(
+        id: 'suidhsuda',
         name: 'Farofa Mineira com suco',
         description:
             'farofa feita com farinha, calabresa e bacon e suco de laranja natural',

@@ -1,8 +1,8 @@
 import 'dart:math';
 
+import 'package:cardapio/modules/cart/domain/repositories/i_cart_repository.dart';
 import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
 import 'package:cardapio/modules/menu/domain/entities/weekday.dart';
-import 'package:cardapio/modules/cart/domain/repositories/i_cart_repository.dart';
 import 'package:dartz/dartz.dart';
 
 import '../../../errors/errors.dart';
@@ -18,6 +18,7 @@ class MockRepImpl implements IItemMenuRepository {
       final random = Random();
       menuList.add(
         ItemMenu(
+            id: 'id',
             name: 'Carbo com Farinha Temperada e Batata Frita $i',
             description:
                 'comida feita com o ingrediente de numero ${i * 35}, recheado com o molho de numero ${i * 17} e também temperado com ervas número ${i * 23}',
@@ -52,16 +53,14 @@ class MockMenuCartRepositoryImpl implements ICartRepository {
   MockMenuCartRepositoryImpl._internal();
 
   @override
-  Future<Either<CartError, ItemMenu>> addItemToCart(
-      ItemMenu itemMenu) async {
+  Future<Either<CartError, ItemMenu>> addItemToCart(ItemMenu itemMenu) async {
     menuCartList.add(itemMenu);
 
     return Right(itemMenu);
   }
 
   @override
-  Future<Either<CartError, bool>> removeItemFromCart(
-      ItemMenu itemMenu) async {
+  Future<Either<CartError, bool>> removeItemFromCart(ItemMenu itemMenu) async {
     final result = menuCartList.remove(itemMenu);
 
     if (result == false) {
