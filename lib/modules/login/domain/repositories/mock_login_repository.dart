@@ -10,7 +10,10 @@ class MockLoginRepository implements ILoginRepository {
     await Future.delayed(const Duration(seconds: 2));
 
     return Right(User(
-        name: 'Vinicius Nunes', email: 'viny@gmail.com', phone: '19981436342'));
+        id: 'id',
+        name: 'Vinicius Nunes',
+        email: 'viny@gmail.com',
+        phone: '19981436342'));
 
     /*return Left(LoginError('Usuario ou senha invalido'));*/
   }

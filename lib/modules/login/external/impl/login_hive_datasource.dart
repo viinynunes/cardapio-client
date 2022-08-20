@@ -7,7 +7,7 @@ class LoginHiveDatasource implements ILoggedUserDatasource {
   Future<User> getLoggedUser() async {
     await Future.delayed(const Duration(seconds: 2));
 
-    return User(
+    return User(id: 'id',
         name: 'Vinicius Nunes', email: 'viny@gmail.com', phone: '19981436342');
 
     /*return Left(LoginError('Usuario ou senha invalido'));*/
