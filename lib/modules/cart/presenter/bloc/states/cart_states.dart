@@ -8,6 +8,8 @@ class CartInitialState extends CartStates {}
 
 class CartLoadingState extends CartStates {}
 
+class CartRemoveLoadingState extends CartStates {}
+
 class CartSuccessState extends CartStates {}
 
 class CartAddItemSuccessState extends CartStates {

@@ -40,9 +40,7 @@ class CartBloc extends Bloc<CartEvents, CartStates> {
 
       result.fold((l) {
         emit(CartErrorState(l));
-      }, (r) {
-        emit(CartSuccessState());
-      });
+      }, (r) {});
     });
   }
 }

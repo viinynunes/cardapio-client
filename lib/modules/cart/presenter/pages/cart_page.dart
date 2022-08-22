@@ -82,7 +82,9 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
                   }
                 }
 
-                return Container();
+                return Container(
+                  color: Colors.purpleAccent,
+                );
               },
             )
           ],
@@ -138,7 +140,6 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
                           ),
                         );
                       }
-
                       return ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
