@@ -42,7 +42,6 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
     orderLoadingAnimationController.dispose();
     orderCompletedAnimationController.dispose();
 
-    cartBloc.close();
     super.dispose();
   }
 
