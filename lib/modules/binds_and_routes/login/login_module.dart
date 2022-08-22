@@ -16,7 +16,6 @@ class LoginModule extends Module {
         Bind((i) => LoginHiveDatasource()),
         Bind((i) => LoggedUserRepositoryImpl(i())),
         Bind((i) => LoggedUserUsecaseImpl(i())),
-        Bind((i) => LoggedUserUsecaseImpl(i())),
 
         //Online Login Dependencies
         Bind((i) => LoginFirebaseDatasource(i())),
