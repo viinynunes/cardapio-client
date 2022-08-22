@@ -3,8 +3,8 @@ import 'package:cardapio/modules/order/domain/entities/order.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class PersonalOrdersTile extends StatelessWidget {
-  const PersonalOrdersTile({Key? key, required this.order, required this.onTap})
+class OrdersTile extends StatelessWidget {
+  const OrdersTile({Key? key, required this.order, required this.onTap})
       : super(key: key);
 
   final Order order;

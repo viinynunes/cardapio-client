@@ -10,16 +10,16 @@ import 'package:lottie/lottie.dart';
 
 import '../../domain/entities/order.dart';
 
-class PersonalOrderItem extends StatefulWidget {
-  const PersonalOrderItem({Key? key, required this.order}) : super(key: key);
+class OrderItem extends StatefulWidget {
+  const OrderItem({Key? key, required this.order}) : super(key: key);
 
   final Order order;
 
   @override
-  State<PersonalOrderItem> createState() => _PersonalOrderItemState();
+  State<OrderItem> createState() => _OrderItemState();
 }
 
-class _PersonalOrderItemState extends State<PersonalOrderItem>
+class _OrderItemState extends State<OrderItem>
     with TickerProviderStateMixin {
   final bloc = Modular.get<OrderBloc>();
 

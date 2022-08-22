@@ -1,19 +1,19 @@
 import 'package:cardapio/modules/order/presenter/bloc/events/order_events.dart';
 import 'package:cardapio/modules/order/presenter/bloc/order_bloc.dart';
 import 'package:cardapio/modules/order/presenter/bloc/states/order_states.dart';
-import 'package:cardapio/modules/order/presenter/pages/tiles/personal_orders_tile.dart';
+import 'package:cardapio/modules/order/presenter/pages/tiles/orders_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class PersonalOrders extends StatefulWidget {
-  const PersonalOrders({Key? key}) : super(key: key);
+class Orders extends StatefulWidget {
+  const Orders({Key? key}) : super(key: key);
 
   @override
-  State<PersonalOrders> createState() => _PersonalOrdersState();
+  State<Orders> createState() => _OrdersState();
 }
 
-class _PersonalOrdersState extends State<PersonalOrders>
+class _OrdersState extends State<Orders>
     with TickerProviderStateMixin {
   final bloc = Modular.get<OrderBloc>();
 
@@ -57,7 +57,7 @@ class _PersonalOrdersState extends State<PersonalOrders>
                 itemBuilder: (context, index) {
                   var order = orderList[index];
 
-                  return PersonalOrdersTile(
+                  return OrdersTile(
                     order: order,
                     onTap: () async {
                       final eventPressed = await Modular.to
