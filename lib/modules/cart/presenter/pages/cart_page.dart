@@ -178,7 +178,7 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
                       orderCompletedAnimationController.addStatusListener(
                         (status) {
                           status == AnimationStatus.completed
-                              ? Modular.to.pushReplacementNamed('/order/')
+                              ? Modular.to.pushReplacementNamed('../order/')
                               : null;
                         },
                       );
