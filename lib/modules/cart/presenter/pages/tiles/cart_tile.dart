@@ -2,14 +2,15 @@ import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
 import 'package:flutter/material.dart';
 
 class CartTile extends StatelessWidget {
-  const CartTile({Key? key, required this.item, required this.removeItemButtonAction}) : super(key: key);
+  const CartTile(
+      {Key? key, required this.item, required this.removeItemButtonAction})
+      : super(key: key);
 
   final ItemMenu item;
   final VoidCallback removeItemButtonAction;
 
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
 
     return Card(
@@ -25,6 +26,7 @@ class CartTile extends StatelessWidget {
                     image: NetworkImage(item.imgUrl),
                     fit: BoxFit.cover,
                   ),
+                  borderRadius: BorderRadius.circular(16),
                 ),
               ),
             ),
