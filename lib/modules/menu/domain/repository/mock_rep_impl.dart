@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:cardapio/modules/cart/domain/repositories/i_cart_repository.dart';
 import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
 import 'package:cardapio/modules/menu/domain/entities/weekday.dart';
 import 'package:dartz/dartz.dart';
@@ -37,48 +36,5 @@ class MockRepImpl implements IItemMenuRepository {
         .toList();
 
     return Right(listPerDay);
-  }
-}
-
-class MockMenuCartRepositoryImpl implements ICartRepository {
-  List<ItemMenu> menuCartList = [];
-
-  static final MockMenuCartRepositoryImpl _mockMenuRep =
-      MockMenuCartRepositoryImpl._internal();
-
-  factory MockMenuCartRepositoryImpl() {
-    return _mockMenuRep;
-  }
-
-  MockMenuCartRepositoryImpl._internal();
-
-  @override
-  Future<Either<CartError, ItemMenu>> addItemToCart(ItemMenu itemMenu) async {
-    menuCartList.add(itemMenu);
-
-    return Right(itemMenu);
-  }
-
-  @override
-  Future<Either<CartError, bool>> removeItemFromCart(ItemMenu itemMenu) async {
-    final result = menuCartList.remove(itemMenu);
-
-    if (result == false) {
-      return Left(CartError('Error removing item menu from cart'));
-    }
-
-    return Right(result);
-  }
-
-  @override
-  Future<Either<CartError, bool>> clearMenuCartList() async {
-    menuCartList.clear();
-
-    return const Right(true);
-  }
-
-  @override
-  Future<Either<CartError, List<ItemMenu>>> getMenuCartList() async {
-    return Right(menuCartList);
   }
 }
