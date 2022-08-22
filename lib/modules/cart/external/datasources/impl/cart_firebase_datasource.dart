@@ -22,15 +22,25 @@ class CartFirebaseDatasource implements ICartDatasource {
         .doc(user.id)
         .collection('cart')
         .add(item.toMap())
-        .then((value) => item.id = value.id);
+        .then((value) {
+      item.id = value.id;
+      _userCollection
+          .doc(user.id)
+          .collection('cart')
+          .doc(value.id)
+          .update(item.toMap());
+    });
 
     return item;
   }
 
   @override
-  Future<bool> removeItemFromCart(ItemMenuModel item) {
-    // TODO: implement removeItemFromCart
-    throw UnimplementedError();
+  Future<bool> removeItemFromCart(ItemMenuModel item) async {
+    final user = await _getLoggedUser();
+
+    await _userCollection.doc(user.id).collection('cart').doc(item.id).delete();
+
+    return true;
   }
 
   @override
