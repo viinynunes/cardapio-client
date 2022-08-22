@@ -44,9 +44,17 @@ class CartFirebaseDatasource implements ICartDatasource {
   }
 
   @override
-  Future<bool> clearMenuCartList() {
-    // TODO: implement clearMenuCartList
-    throw UnimplementedError();
+  Future<bool> clearMenuCartList() async {
+    final user = await _getLoggedUser();
+
+    final cartList =
+        await _userCollection.doc(user.id).collection('cart').get();
+
+    for (var doc in cartList.docs) {
+      await doc.reference.delete();
+    }
+
+    return true;
   }
 
   @override
