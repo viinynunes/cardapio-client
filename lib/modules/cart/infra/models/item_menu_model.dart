@@ -20,6 +20,15 @@ class ItemMenuModel extends ItemMenu {
           weekdayList: itemMenu.weekdayList,
         );
 
+  ItemMenuModel.fromMap({required Map<String, dynamic> map})
+      : super(
+          id: map['id'],
+          name: map['name'],
+          description: map['description'],
+          imgUrl: map['imgUrl'],
+          weekdayList: map['weekdayList'].cast<int>(),
+        );
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -30,17 +39,8 @@ class ItemMenuModel extends ItemMenu {
     };
   }
 
-  ItemMenuModel fromMap(Map<String, dynamic> map) {
-    return ItemMenuModel(
-      id: map['id'],
-      name: map['name'],
-      description: map['description'],
-      imgUrl: map['imgUrl'],
-      weekdayList: map['weekdayList'],
-    );
-  }
-
   String toJson() => json.encode(toMap());
 
-  ItemMenuModel fromJson(String source) => fromMap(json.decode(source));
+  ItemMenuModel fromJson(String source) =>
+      ItemMenuModel.fromMap(map: json.decode(source) as Map<String, dynamic>);
 }
