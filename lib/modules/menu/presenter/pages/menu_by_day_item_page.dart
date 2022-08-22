@@ -48,17 +48,30 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage>
         title: Text(widget.menuItem.name),
         centerTitle: true,
         actions: [
-          BlocBuilder<MenuByDayItemBloc, MenuByDayItemStates>(
+          BlocListener<MenuByDayItemBloc, MenuByDayItemStates>(
             bloc: bloc,
-            builder: (context, state) {
-              if (state is MenuByDayItemSuccessState) {
-                return Center(
-                  child: Text(state.itemMenuList!.length.toString()),
+            listener: (context, state) {
+              if (state is MenuByDayItemErrorState) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.error.message),
+                    backgroundColor: Colors.red,
+                  ),
                 );
               }
-
-              return Container();
             },
+            child: BlocBuilder<MenuByDayItemBloc, MenuByDayItemStates>(
+              bloc: bloc,
+              builder: (context, state) {
+                if (state is MenuByDayItemGetListSuccessState) {
+                  return Center(
+                    child: Text(state.itemMenuList.length.toString()),
+                  );
+                }
+
+                return Container();
+              },
+            ),
           ),
           GestureDetector(
               onTap: () async {
@@ -81,7 +94,7 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage>
           ? FloatingActionButton(
               onPressed: () async {
                 bloc.add(MenuByDayItemAddItemMenuToCartEvent(widget.menuItem));
-                bloc.add(MenuByDayItemGetMenuCartEvent());
+                //bloc.add(MenuByDayItemGetMenuCartEvent());
 
                 _cartIconController.forward();
                 await Future.delayed(const Duration(seconds: 1));
@@ -92,39 +105,38 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage>
             )
           : null,
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              height: size.height * 0.4,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(widget.menuItem.imgUrl),
-                    fit: BoxFit.cover),
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            height: size.height * 0.4,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage(widget.menuItem.imgUrl),
+                  fit: BoxFit.cover),
+            ),
+          ),
+          Card(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                widget.menuItem.name,
+                style: const TextStyle(fontSize: 25),
+                textAlign: TextAlign.center,
               ),
             ),
-            Card(
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  widget.menuItem.name,
-                  style: const TextStyle(fontSize: 25),
-                  textAlign: TextAlign.center,
-                ),
+          ),
+          Card(
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                widget.menuItem.description,
+                style: const TextStyle(fontSize: 20),
               ),
             ),
-            Card(
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                child: Text(
-                  widget.menuItem.description,
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        ],
+      )),
     );
   }
 }

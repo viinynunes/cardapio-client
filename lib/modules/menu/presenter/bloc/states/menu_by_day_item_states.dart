@@ -8,11 +8,16 @@ class MenuByDayItemIdleState extends MenuByDayItemStates {}
 
 class MenuByDayItemLoadingState extends MenuByDayItemStates {}
 
-class MenuByDayItemSuccessState extends MenuByDayItemStates {
-  final ItemMenu? itemMenu;
-  final List<ItemMenu>? itemMenuList;
+class MenuByDayItemGetListSuccessState extends MenuByDayItemStates {
+  final List<ItemMenu> itemMenuList;
 
-  MenuByDayItemSuccessState({this.itemMenu, this.itemMenuList});
+  MenuByDayItemGetListSuccessState(this.itemMenuList);
+}
+
+class MenuByDayItemAddItemToCartSuccessState extends MenuByDayItemStates {
+  final ItemMenu itemMenu;
+
+  MenuByDayItemAddItemToCartSuccessState(this.itemMenu);
 }
 
 class MenuByDayItemErrorState extends MenuByDayItemStates {
