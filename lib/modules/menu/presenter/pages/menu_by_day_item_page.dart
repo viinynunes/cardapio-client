@@ -69,6 +69,12 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage>
                   );
                 }
 
+                if (state is CartLoadingState) {
+                  return const Center(
+                    child: CircularProgressIndicator(color: Colors.white,)
+                  );
+                }
+
                 return Container();
               },
             ),
@@ -93,12 +99,11 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage>
           widget.menuItem.weekdayList.contains(DateTime.now().weekday)
               ? FloatingActionButton(
                   onPressed: () async {
-                    bloc.add(AddItemToCartEvent(widget.menuItem));
-                    //bloc.add(MenuByDayItemGetMenuCartEvent());
-
                     _cartIconController.forward();
-                    await Future.delayed(const Duration(seconds: 1));
+                    bloc.add(AddItemToCartEvent(widget.menuItem));
+                    bloc.add(GetCartListEvent());
 
+                    await Future.delayed(const Duration(seconds: 1));
                     _cartIconController.reset();
                   },
                   child: const Icon(Icons.add),
