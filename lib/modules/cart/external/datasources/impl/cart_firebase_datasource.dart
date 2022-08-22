@@ -8,6 +8,8 @@ import '../../../infra/datasources/i_cart_datasource.dart';
 class CartFirebaseDatasource implements ICartDatasource {
   final ILoggedUserDatasource _loggedUserDatasource;
 
+  late User user;
+
   CartFirebaseDatasource(this._loggedUserDatasource);
 
   final _userCollection = FirebaseFirestore.instance.collection('users');
@@ -39,7 +41,17 @@ class CartFirebaseDatasource implements ICartDatasource {
 
   @override
   Future<List<ItemMenuModel>> getMenuCartList() async {
-    return [];
+    List<ItemMenuModel> cartList = [];
+
+    final user = await _getLoggedUser();
+
+    final result = await _userCollection.doc(user.id).collection('cart').get();
+
+    for (var e in result.docs) {
+      cartList.add(ItemMenuModel.fromMap(map: e.data()));
+    }
+
+    return cartList;
   }
 
   Future<User> _getLoggedUser() async {
