@@ -1,7 +1,7 @@
-import 'package:cardapio/modules/menu/presenter/bloc/events/menu_by_day_events.dart';
-import 'package:cardapio/modules/menu/presenter/bloc/states/menu_by_day_states.dart';
-import 'package:cardapio/modules/menu/presenter/bloc/menu_by_day_bloc.dart';
 import 'package:cardapio/modules/menu/domain/entities/weekday.dart';
+import 'package:cardapio/modules/menu/presenter/bloc/events/menu_by_day_events.dart';
+import 'package:cardapio/modules/menu/presenter/bloc/menu_by_day_bloc.dart';
+import 'package:cardapio/modules/menu/presenter/bloc/states/menu_by_day_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -40,7 +40,7 @@ class _MenuByDayPageState extends State<MenuByDayPage> {
             child: GestureDetector(
               onTap: () {
                 !widget.weekday.today
-                    ? Modular.to.pushNamed('././menu-by-day',
+                    ? Modular.to.pushNamed('./menu-by-day',
                         arguments: [widget.today, widget.today])
                     : null;
               },

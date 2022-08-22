@@ -7,7 +7,7 @@ import 'package:dartz/dartz.dart';
 import '../../../errors/errors.dart';
 import 'i_menu_item_repository.dart';
 
-class MockRepImpl implements IItemMenuRepository {
+class MockItemMenuRepository implements IItemMenuRepository {
   @override
   Future<Either<GetMenuError, List<ItemMenu>>> getItemMenuByDay(
       Weekday weekday) async {

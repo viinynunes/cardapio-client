@@ -3,24 +3,22 @@ import 'package:cardapio/modules/menu/domain/usecases/impl/days_of_week_usecase_
 import 'package:cardapio/modules/menu/domain/usecases/impl/menu_item_usecase_impl.dart';
 import 'package:cardapio/modules/menu/presenter/bloc/days_of_week_bloc.dart';
 import 'package:cardapio/modules/menu/presenter/bloc/menu_by_day_bloc.dart';
-import 'package:cardapio/modules/menu/presenter/bloc/menu_by_day_item_bloc.dart';
 import 'package:cardapio/modules/menu/presenter/pages/days_of_week_page.dart';
 import 'package:cardapio/modules/menu/presenter/pages/menu_by_day_item_page.dart';
 import 'package:cardapio/modules/menu/presenter/pages/menu_by_day_page.dart';
-import 'package:cardapio/modules/cart/domain/usecase/impl/cart_usecase_impl.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class MenuModule extends Module {
   @override
   List<Bind> get binds => [
+        //Days of week dependencies
         Bind.factory((i) => DaysOfWeekUsecaseImpl()),
         Bind.singleton((i) => DaysOfWeekBloc(i())),
-        Bind.factory((i) => MockRepImpl()),
+
+        //ItemMenu dependencies
+        Bind.factory((i) => MockItemMenuRepository()),
         Bind.factory((i) => ItemMenuUsecaseImpl(i())),
         Bind.singleton((i) => MenuByDayBloc(i())),
-        Bind.factory((i) => MockMenuCartRepositoryImpl()),
-        Bind.factory((i) => CartUsecaseImpl(i())),
-        Bind.singleton((i) => MenuByDayItemBloc(i())),
       ];
 
   @override

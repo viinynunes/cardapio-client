@@ -8,15 +8,22 @@ class CartInitialState extends CartStates {}
 
 class CartLoadingState extends CartStates {}
 
-class CartSuccessState extends CartStates {
-  final List<ItemMenu> menuItemCartList;
+class CartSuccessState extends CartStates {}
 
-  CartSuccessState(this.menuItemCartList);
+class CartAddItemSuccessState extends CartStates {
+  final ItemMenu itemMenu;
+
+  CartAddItemSuccessState(this.itemMenu);
+}
+
+class CartGetCartListSuccessState extends CartStates {
+  final List<ItemMenu> cartList;
+
+  CartGetCartListSuccessState(this.cartList);
 }
 
 class CartErrorState extends CartStates {
-  final OrderError? orderError;
-  final CartError? menuCartError;
+  final CartError error;
 
-  CartErrorState({this.menuCartError, this.orderError});
+  CartErrorState(this.error);
 }

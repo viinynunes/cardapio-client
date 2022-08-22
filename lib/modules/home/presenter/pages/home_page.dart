@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Modular.to.pushNamed('/cart/');
+              Modular.to.pushNamed('../cart/');
             },
             icon: const Icon(Icons.shopping_cart_outlined),
           ),
@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                     title: 'Cardápio da Semana',
                     icon: Icons.menu_book,
                     onTap: () {
-                      Modular.to.pushNamed('/menu/');
+                      Modular.to.pushNamed('../menu/');
                     },
                   ),
                   const SizedBox(
@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                     title: 'Meus Pedidos',
                     icon: Icons.reorder,
                     onTap: () {
-                      Modular.to.pushNamed('/order/');
+                      Modular.to.pushNamed('../order/');
                     },
                   ),
                   const SizedBox(

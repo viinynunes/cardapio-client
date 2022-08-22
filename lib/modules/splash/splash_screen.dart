@@ -14,7 +14,7 @@ class _SplashScreenInitialState extends State<SplashScreenInitial> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 2))
-        .then((_) => Modular.to.navigate('/home'));
+        .then((_) => Modular.to.navigate('/login/navigation/home/'));
   }
 
   @override

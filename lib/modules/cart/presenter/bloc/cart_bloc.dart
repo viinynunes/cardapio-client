@@ -7,7 +7,31 @@ class CartBloc extends Bloc<CartEvents, CartStates> {
   final ICartUsecase cartUsecase;
 
   CartBloc(this.cartUsecase) : super(CartInitialState()) {
-    on<RemoveItemMenuFromCart>((event, emit) async {
+    on<GetCartListEvent>((event, emit) async {
+      emit(CartLoadingState());
+
+      final result = await cartUsecase.getMenuCartList();
+
+      result.fold((l) {
+        emit(CartErrorState(l));
+      }, (r) {
+        emit(CartGetCartListSuccessState(r));
+      });
+    });
+
+    on<AddItemToCartEvent>((event, emit) async {
+      emit(CartLoadingState());
+
+      final result = await cartUsecase.addItemToCart(event.itemMenu);
+
+      result.fold((l) {
+        emit(CartErrorState(l));
+      }, (r) {
+        emit(CartAddItemSuccessState(r));
+      });
+    });
+
+    on<RemoveItemFromCartEvent>((event, emit) async {
       emit(CartLoadingState());
 
       final result = await cartUsecase.removeItemFromCart(event.item);
@@ -15,21 +39,9 @@ class CartBloc extends Bloc<CartEvents, CartStates> {
       Future.delayed(const Duration(seconds: 1));
 
       result.fold((l) {
-        emit(CartErrorState(menuCartError: l));
+        emit(CartErrorState(l));
       }, (r) {
-        emit(CartSuccessState([]));
-      });
-    });
-
-    on<GetMenuCartList>((event, emit) async {
-      emit(CartLoadingState());
-
-      final result = await cartUsecase.getMenuCartList();
-
-      result.fold((l) {
-        emit(CartErrorState(menuCartError: l));
-      }, (r) {
-        emit(CartSuccessState(r));
+        emit(CartSuccessState());
       });
     });
   }

@@ -1,6 +1,6 @@
-import 'package:cardapio/modules/menu/presenter/bloc/events/menu_by_day_item_events.dart';
-import 'package:cardapio/modules/menu/presenter/bloc/menu_by_day_item_bloc.dart';
-import 'package:cardapio/modules/menu/presenter/bloc/states/menu_by_day_item_states.dart';
+import 'package:cardapio/modules/cart/presenter/bloc/cart_bloc.dart';
+import 'package:cardapio/modules/cart/presenter/bloc/events/cart_events.dart';
+import 'package:cardapio/modules/cart/presenter/bloc/states/cart_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -19,7 +19,7 @@ class MenuByDayItemPage extends StatefulWidget {
 
 class _MenuByDayItemPageState extends State<MenuByDayItemPage>
     with TickerProviderStateMixin {
-  final bloc = Modular.get<MenuByDayItemBloc>();
+  final bloc = Modular.get<CartBloc>();
 
   late final AnimationController _cartIconController;
 
@@ -29,7 +29,7 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage>
     _cartIconController = AnimationController(vsync: this);
     _cartIconController.duration = const Duration(seconds: 1);
 
-    bloc.add(MenuByDayItemGetMenuCartEvent());
+    bloc.add(GetCartListEvent());
   }
 
   @override
@@ -48,10 +48,10 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage>
         title: Text(widget.menuItem.name),
         centerTitle: true,
         actions: [
-          BlocListener<MenuByDayItemBloc, MenuByDayItemStates>(
+          BlocListener<CartBloc, CartStates>(
             bloc: bloc,
             listener: (context, state) {
-              if (state is MenuByDayItemErrorState) {
+              if (state is CartErrorState) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(state.error.message),
@@ -60,12 +60,12 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage>
                 );
               }
             },
-            child: BlocBuilder<MenuByDayItemBloc, MenuByDayItemStates>(
+            child: BlocBuilder<CartBloc, CartStates>(
               bloc: bloc,
               builder: (context, state) {
-                if (state is MenuByDayItemGetListSuccessState) {
+                if (state is CartGetCartListSuccessState) {
                   return Center(
-                    child: Text(state.itemMenuList.length.toString()),
+                    child: Text(state.cartList.length.toString()),
                   );
                 }
 
@@ -75,9 +75,9 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage>
           ),
           GestureDetector(
               onTap: () async {
-                await Modular.to.pushNamed('/cart/');
+                await Modular.to.pushNamed('../cart/');
 
-                bloc.add(MenuByDayItemGetMenuCartEvent());
+                bloc.add(GetCartListEvent());
               },
               child: Stack(
                 children: [
@@ -89,21 +89,21 @@ class _MenuByDayItemPageState extends State<MenuByDayItemPage>
               ))
         ],
       ),
-      floatingActionButton: widget.menuItem.weekdayList
-              .contains(DateTime.now().weekday)
-          ? FloatingActionButton(
-              onPressed: () async {
-                bloc.add(MenuByDayItemAddItemMenuToCartEvent(widget.menuItem));
-                //bloc.add(MenuByDayItemGetMenuCartEvent());
+      floatingActionButton:
+          widget.menuItem.weekdayList.contains(DateTime.now().weekday)
+              ? FloatingActionButton(
+                  onPressed: () async {
+                    bloc.add(AddItemToCartEvent(widget.menuItem));
+                    //bloc.add(MenuByDayItemGetMenuCartEvent());
 
-                _cartIconController.forward();
-                await Future.delayed(const Duration(seconds: 1));
+                    _cartIconController.forward();
+                    await Future.delayed(const Duration(seconds: 1));
 
-                _cartIconController.reset();
-              },
-              child: const Icon(Icons.add),
-            )
-          : null,
+                    _cartIconController.reset();
+                  },
+                  child: const Icon(Icons.add),
+                )
+              : null,
       body: SingleChildScrollView(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

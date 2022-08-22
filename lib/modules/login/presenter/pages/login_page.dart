@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                                         Text('Bem-vindo ${state.user.name}!'),
                                   ),
                                 );
-                                Modular.to.navigate('/home');
+                                Modular.to.navigate('/home/');
                               }
                             },
                             child: BlocBuilder<LoginBloc, LoginStates>(

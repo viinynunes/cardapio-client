@@ -33,7 +33,7 @@ class _PersonalOrdersState extends State<PersonalOrders>
         actions: [
           IconButton(
             onPressed: () {
-              Modular.to.pushNamed('/cart/');
+              Modular.to.pushNamed('../cart/');
             },
             icon: const Icon(Icons.shopping_cart_outlined),
           ),
@@ -61,7 +61,7 @@ class _PersonalOrdersState extends State<PersonalOrders>
                     order: order,
                     onTap: () async {
                       final eventPressed = await Modular.to
-                          .pushNamed('./order-item', arguments: [order]);
+                          .pushNamed('./order-item/', arguments: [order]);
                       eventPressed == true ? bloc.add(GetOrdersEvent()) : null;
                       //bloc.add(GetOrdersEvent());
                     },

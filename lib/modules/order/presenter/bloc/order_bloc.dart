@@ -16,10 +16,10 @@ class OrderBloc extends Bloc<OrderEvents, OrderStates> {
   final ICartUsecase cartUsecase;
   final ILoggedUserUsecase loggedUserUsecase;
   final IOrderUsecase orderUsecase;
-  final CartBloc menuCartBLoc;
+  final CartBloc cartBLoc;
 
   OrderBloc(this.cartUsecase, this.loggedUserUsecase, this.orderUsecase,
-      this.menuCartBLoc)
+      this.cartBLoc)
       : super(OrderIdleState()) {
     on<SendOrderEvent>((event, emit) async {
       emit(OrderLoadingState());

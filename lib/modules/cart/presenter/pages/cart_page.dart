@@ -28,7 +28,7 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    cartBloc.add(GetMenuCartList());
+    cartBloc.add(GetCartListEvent());
 
     orderCompletedAnimationController = AnimationController(vsync: this);
     orderCompletedAnimationController.duration = const Duration(seconds: 2);
@@ -61,8 +61,8 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
             BlocBuilder<CartBloc, CartStates>(
               bloc: cartBloc,
               builder: (_, state) {
-                if (state is CartSuccessState) {
-                  if (state.menuItemCartList.isNotEmpty) {
+                if (state is CartGetCartListSuccessState) {
+                  if (state.cartList.isNotEmpty) {
                     return GestureDetector(
                       onTap: () {
                         orderBloc.add(SendOrderEvent());
@@ -110,7 +110,7 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
                               size: 100,
                             ),
                             Text(
-                              state.menuCartError?.message ?? '',
+                              state.error.message,
                               style: const TextStyle(fontSize: 50),
                             ),
                           ],
@@ -118,8 +118,8 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
                       );
                     }
 
-                    if (state is CartSuccessState) {
-                      final menuItemCartList = state.menuItemCartList;
+                    if (state is CartGetCartListSuccessState) {
+                      final menuItemCartList = state.cartList;
 
                       if (menuItemCartList.isEmpty) {
                         return Center(
@@ -150,8 +150,8 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
                           return CartTile(
                             item: item,
                             removeItemButtonAction: () {
-                              cartBloc.add(RemoveItemMenuFromCart(item));
-                              cartBloc.add(GetMenuCartList());
+                              cartBloc.add(RemoveItemFromCartEvent(item));
+                              cartBloc.add(GetCartListEvent());
                             },
                           );
                         },
