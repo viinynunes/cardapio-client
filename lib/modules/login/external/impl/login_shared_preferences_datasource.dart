@@ -5,11 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LoginSharedPreferencesDatasource implements ILoggedUserDatasource {
   @override
   Future<UserModel> getLoggedUser() async {
-    return UserModel(
-        id: 'yb2x4yYNPOcvgIhvpNgWiMbKL293',
-        name: 'Vinicius Nunes',
-        email: 'viiny_nunes@hotmail.com',
-        phone: '19981436342');
+    final userPref = await SharedPreferences.getInstance();
+
+    return UserModel.fromJson(userPref.get('user') as String);
   }
 
   @override
