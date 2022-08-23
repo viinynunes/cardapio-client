@@ -1,8 +1,9 @@
 import 'package:cardapio/modules/login/domain/entities/user.dart';
 import 'package:cardapio/modules/login/infra/datasources/i_logged_user_datasource.dart';
 import 'package:cardapio/modules/login/infra/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginHiveDatasource implements ILoggedUserDatasource {
+class LoginSharedPreferencesDatasource implements ILoggedUserDatasource {
   @override
   Future<User> getLoggedUser() async {
     return UserModel(
@@ -19,6 +20,12 @@ class LoginHiveDatasource implements ILoggedUserDatasource {
 
   @override
   Future<UserModel> saveLoggedUser(UserModel user) async {
-    return user;
+    final userPref = await SharedPreferences.getInstance();
+
+    await userPref.setString('user', user.toJson());
+
+    final recUser = UserModel.fromJson(userPref.get('user') as String);
+
+    return recUser;
   }
 }
