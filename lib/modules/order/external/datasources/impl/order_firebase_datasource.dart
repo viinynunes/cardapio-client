@@ -1,3 +1,4 @@
+import 'package:cardapio/modules/cart/infra/models/item_menu_model.dart';
 import 'package:cardapio/modules/errors/errors.dart';
 import 'package:cardapio/modules/login/infra/datasources/i_logged_user_datasource.dart';
 import 'package:cardapio/modules/order/domain/entities/enums/order_status_enum.dart';
@@ -63,7 +64,17 @@ class OrderFirebaseDatasource implements IOrderDatasource {
     final snap = await _orderCollection.doc(user.id).collection('orders').get();
 
     for (var e in snap.docs) {
-      orderList.add(OrderModel.fromMap(map: e.data()));
+      Timestamp timestamp = e.data()['registrationDate'];
+      final registrationDate = DateTime.parse(timestamp.toDate().toString());
+
+      List<ItemMenuModel> menuList = [];
+      for (var e in e.data()['menuList']) {
+        menuList.add(ItemMenuModel.fromMap(map: e));
+      }
+      orderList.add(OrderModel.fromMap(
+          map: e.data(),
+          registrationDate: registrationDate,
+          menuList: menuList));
     }
 
     return orderList;
