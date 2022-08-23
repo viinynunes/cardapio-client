@@ -2,7 +2,7 @@ import 'package:cardapio/modules/binds_and_routes/login/navigation/navigation_mo
 import 'package:cardapio/modules/login/domain/usecases/impl/logged_user_usecase_impl.dart';
 import 'package:cardapio/modules/login/domain/usecases/impl/login_usecase_impl.dart';
 import 'package:cardapio/modules/login/external/impl/login_firebase_datasource.dart';
-import 'package:cardapio/modules/login/external/impl/login_hive_datasource.dart';
+import 'package:cardapio/modules/login/external/impl/login_shared_preferences_datasource.dart';
 import 'package:cardapio/modules/login/infra/repositories/logged_user_repository_impl.dart';
 import 'package:cardapio/modules/login/infra/repositories/login_repository_impl.dart';
 import 'package:cardapio/modules/login/presenter/bloc/login_bloc.dart';
@@ -13,7 +13,7 @@ class LoginModule extends Module {
   @override
   List<Bind> get binds => [
         //Offline Login Dependencies
-        Bind((i) => LoginHiveDatasource()),
+        Bind((i) => LoginSharedPreferencesDatasource()),
         Bind((i) => LoggedUserRepositoryImpl(i())),
         Bind((i) => LoggedUserUsecaseImpl(i())),
 
