@@ -5,12 +5,11 @@ import 'package:cardapio/modules/login/infra/models/user_model.dart';
 class LoginHiveDatasource implements ILoggedUserDatasource {
   @override
   Future<User> getLoggedUser() async {
-    await Future.delayed(const Duration(seconds: 2));
-
-    return User(id: 'yb2x4yYNPOcvgIhvpNgWiMbKL293',
-        name: 'Vinicius Nunes', email: 'viiny_nunes@hotmail.com', phone: '19981436342');
-
-    /*return Left(LoginError('Usuario ou senha invalido'));*/
+    return UserModel(
+        id: 'yb2x4yYNPOcvgIhvpNgWiMbKL293',
+        name: 'Vinicius Nunes',
+        email: 'viiny_nunes@hotmail.com',
+        phone: '19981436342');
   }
 
   @override
