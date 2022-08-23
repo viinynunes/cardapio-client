@@ -28,5 +28,5 @@ class UserModel extends User {
 
   String toJson() => json.encode(toMap());
 
-  UserModel fromJson(String source) => fromMap(json.decode(source));
+  static UserModel fromJson(String source) => fromMap(json.decode(source));
 }
