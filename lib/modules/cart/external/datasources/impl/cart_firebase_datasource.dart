@@ -1,8 +1,8 @@
-import 'package:cardapio/modules/cart/infra/models/item_menu_model.dart';
 import 'package:cardapio/modules/login/domain/entities/user.dart';
 import 'package:cardapio/modules/login/infra/datasources/i_logged_user_datasource.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../../../menu/infra/models/item_menu_model.dart';
 import '../../../infra/datasources/i_cart_datasource.dart';
 
 class CartFirebaseDatasource implements ICartDatasource {

@@ -1,4 +1,4 @@
-import 'package:cardapio/modules/cart/infra/models/item_menu_model.dart';
+import '../../../menu/infra/models/item_menu_model.dart';
 
 abstract class ICartDatasource {
   Future<ItemMenuModel> addItemToCart(ItemMenuModel item);

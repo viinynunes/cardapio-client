@@ -1,9 +1,9 @@
 import 'package:cardapio/modules/cart/domain/repositories/i_cart_repository.dart';
-import 'package:cardapio/modules/cart/infra/models/item_menu_model.dart';
 import 'package:cardapio/modules/errors/errors.dart';
 import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
 import 'package:dartz/dartz.dart';
 
+import '../../../menu/infra/models/item_menu_model.dart';
 import '../datasources/i_cart_datasource.dart';
 
 class CartRepositoryImpl implements ICartRepository {

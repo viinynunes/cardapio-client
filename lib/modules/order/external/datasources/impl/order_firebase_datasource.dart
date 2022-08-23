@@ -1,4 +1,3 @@
-import 'package:cardapio/modules/cart/infra/models/item_menu_model.dart';
 import 'package:cardapio/modules/errors/errors.dart';
 import 'package:cardapio/modules/login/infra/datasources/i_logged_user_datasource.dart';
 import 'package:cardapio/modules/order/domain/entities/enums/order_status_enum.dart';
@@ -7,6 +6,7 @@ import 'package:cardapio/modules/order/infra/models/order_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../../login/infra/models/user_model.dart';
+import '../../../../menu/infra/models/item_menu_model.dart';
 
 class OrderFirebaseDatasource implements IOrderDatasource {
   final ILoggedUserDatasource _loggedUserDatasource;
@@ -18,7 +18,6 @@ class OrderFirebaseDatasource implements IOrderDatasource {
   Future<OrderModel> create(OrderModel order) async {
     try {
       final user = UserModel.fromUser(user: order.user).toMap();
-
       final result = await _orderCollection
           .doc(order.user.id)
           .collection('orders')

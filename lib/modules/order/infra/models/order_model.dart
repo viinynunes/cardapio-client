@@ -1,8 +1,8 @@
-import 'package:cardapio/modules/cart/infra/models/item_menu_model.dart';
 import 'package:cardapio/modules/login/infra/models/user_model.dart';
 import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
 import 'package:cardapio/modules/order/domain/entities/enums/order_status_enum.dart';
 
+import '../../../menu/infra/models/item_menu_model.dart';
 import '../../domain/entities/order.dart';
 
 class OrderModel extends Order {
