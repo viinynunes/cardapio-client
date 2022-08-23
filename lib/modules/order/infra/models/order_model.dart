@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cardapio/modules/cart/infra/models/item_menu_model.dart';
 import 'package:cardapio/modules/login/infra/models/user_model.dart';
 import 'package:cardapio/modules/menu/domain/entities/item_menu.dart';
@@ -30,14 +28,17 @@ class OrderModel extends Order {
           menuList: order.menuList,
         );
 
-  OrderModel.fromMap({required Map<String, dynamic> map})
+  OrderModel.fromMap(
+      {required Map<String, dynamic> map,
+      required DateTime registrationDate,
+      required List<ItemMenuModel> menuList})
       : super(
-            id: map['id'],
-            user: map['user'],
-            registrationDate:
-                DateTime.parse(map['registrationDate'].toString()),
-            status: map['status'],
-            menuList: map['menuList'].cast<ItemMenu>());
+          id: map['id'],
+          user: UserModel.fromMap(map['user']),
+          registrationDate: registrationDate,
+          status: OrderStatus.values.byName(map['status']),
+          menuList: menuList,
+        );
 
   Map<String, dynamic> toMap({required Map<String, dynamic> user}) {
     final map = {
@@ -45,12 +46,11 @@ class OrderModel extends Order {
       'user': user,
       'registrationDate': registrationDate,
       'status': status.name,
-      'menuList': menuList.map((e) => ItemMenuModel.fromItemMenu(itemMenu: e).toMap()).toList(),
+      'menuList': menuList
+          .map((e) => ItemMenuModel.fromItemMenu(itemMenu: e).toMap())
+          .toList(),
     };
 
     return map;
   }
-
-  OrderModel fromJson(String source) =>
-      OrderModel.fromMap(map: json.decode(source));
 }
