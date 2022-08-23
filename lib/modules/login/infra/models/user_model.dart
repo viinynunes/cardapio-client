@@ -9,6 +9,10 @@ class UserModel extends User {
       required super.email,
       required super.phone});
 
+  UserModel.fromUser({required User user})
+      : super(
+            id: user.id, name: user.name, email: user.email, phone: user.phone);
+
   Map<String, dynamic> toMap() {
     return {'id': id, 'name': name, 'email': email, 'phone': phone};
   }
