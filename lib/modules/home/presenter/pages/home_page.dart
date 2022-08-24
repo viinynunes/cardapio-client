@@ -63,7 +63,9 @@ class HomePage extends StatelessWidget {
                   HomeTile(
                     title: 'Pesquisa de Satisfação',
                     icon: Icons.star_rate,
-                    onTap: () {},
+                    onTap: () {
+                      Modular.to.pushNamed('../survey/');
+                    },
                   ),
                   const SizedBox(
                     height: 10,

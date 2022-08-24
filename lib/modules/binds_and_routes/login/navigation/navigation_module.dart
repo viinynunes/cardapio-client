@@ -13,6 +13,7 @@ import '../../../order/presenter/bloc/order_bloc.dart';
 import 'cart/cart_module.dart';
 import 'menu/menu_module.dart';
 import 'order/order_module.dart';
+import 'survey/survey_module.dart';
 
 class NavigationModule extends Module {
   @override
@@ -37,5 +38,6 @@ class NavigationModule extends Module {
         ModuleRoute('/cart/', module: CartModule()),
         ModuleRoute('/menu/', module: MenuModule()),
         ModuleRoute('/order/', module: OrderModule()),
+        ModuleRoute('/survey/', module: SurveyModule()),
       ];
 }
