@@ -183,6 +183,14 @@ class _CartPageState extends State<CartPage> with TickerProviderStateMixin {
                         },
                       );
 
+                      if (state is OrderErrorState) {
+                        return const Scaffold(
+                          backgroundColor: Colors.white,
+                          body:
+                              Center(child: Text('Sem conexão com a internet')),
+                        );
+                      }
+
                       orderCompletedAnimationController.forward();
 
                       return Scaffold(

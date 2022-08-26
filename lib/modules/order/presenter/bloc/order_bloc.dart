@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cardapio/modules/core/connectivity/usecases/i_connectivity_usecase.dart';
 import 'package:cardapio/modules/errors/errors.dart';
 import 'package:cardapio/modules/login/domain/usecases/i_logged_user_usecase.dart';
 
@@ -13,13 +14,14 @@ import 'events/order_events.dart';
 import 'states/order_states.dart';
 
 class OrderBloc extends Bloc<OrderEvents, OrderStates> {
+  final IConnectivityUsecase connectivityUsecase;
   final ICartUsecase cartUsecase;
   final ILoggedUserUsecase loggedUserUsecase;
   final IOrderUsecase orderUsecase;
   final CartBloc cartBLoc;
 
-  OrderBloc(this.cartUsecase, this.loggedUserUsecase, this.orderUsecase,
-      this.cartBLoc)
+  OrderBloc(this.connectivityUsecase, this.cartUsecase, this.loggedUserUsecase,
+      this.orderUsecase, this.cartBLoc)
       : super(OrderIdleState()) {
     on<SendOrderEvent>((event, emit) async {
       emit(OrderLoadingState());
@@ -45,12 +47,18 @@ class OrderBloc extends Bloc<OrderEvents, OrderStates> {
             registrationDate: DateTime.now(),
             status: OrderStatus.open);
 
-        final orderResult = await orderUsecase.create(order);
+        final connected = await connectivityUsecase.checkConnectivity();
 
-        orderResult.fold((l) => emit(OrderErrorState(l)),
-            (r) => emit(OrderSendOrderSuccessState(r)));
+        if (connected) {
+          final orderResult = await orderUsecase.create(order);
 
-        await cartUsecase.clearMenuCartList();
+          orderResult.fold((l) => emit(OrderErrorState(l)),
+              (r) => emit(OrderSendOrderSuccessState(r)));
+
+          await cartUsecase.clearMenuCartList();
+        } else {
+          emit(OrderErrorState(OrderError('No internet connection')));
+        }
       } else {
         emit(OrderErrorState(OrderError('')));
       }

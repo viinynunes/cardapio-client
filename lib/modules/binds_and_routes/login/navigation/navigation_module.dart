@@ -28,7 +28,7 @@ class NavigationModule extends Module {
         Bind((i) => OrderFirebaseDatasource(i())),
         Bind((i) => OrderRepositoryImpl(i())),
         Bind((i) => OrderUsecaseImpl(i())),
-        Bind((i) => OrderBloc(i(), i(), i(), i()))
+        Bind((i) => OrderBloc(i(), i(), i(), i(), i()))
       ];
 
   @override
