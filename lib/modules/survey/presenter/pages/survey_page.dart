@@ -32,6 +32,13 @@ class _SurveyPageState extends State<SurveyPage> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    _surveyResponseAniController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
