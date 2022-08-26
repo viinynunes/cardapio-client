@@ -5,6 +5,7 @@ import 'package:cardapio/modules/login/external/impl/login_firebase_datasource.d
 import 'package:cardapio/modules/login/external/impl/login_shared_preferences_datasource.dart';
 import 'package:cardapio/modules/login/infra/repositories/logged_user_repository_impl.dart';
 import 'package:cardapio/modules/login/infra/repositories/login_repository_impl.dart';
+import 'package:cardapio/modules/login/presenter/bloc/logged_user_bloc.dart';
 import 'package:cardapio/modules/login/presenter/bloc/login_bloc.dart';
 import 'package:cardapio/modules/login/presenter/pages/login_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -16,6 +17,7 @@ class LoginModule extends Module {
         Bind((i) => LoginSharedPreferencesDatasource()),
         Bind((i) => LoggedUserRepositoryImpl(i())),
         Bind((i) => LoggedUserUsecaseImpl(i())),
+        Bind((i) => LoggedUserBloc(i())),
 
         //Online Login Dependencies
         Bind((i) => LoginFirebaseDatasource(i())),
