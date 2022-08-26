@@ -43,6 +43,8 @@ class OrderRepositoryImpl implements IOrderRepository {
     try {
       final result = await _orderDatasource.getOrders();
 
+      _orderDatasource.sortOrderList(result);
+
       return Right(result);
     } on OrderError catch (e) {
       return Left(e);

@@ -78,4 +78,9 @@ class OrderFirebaseDatasource implements IOrderDatasource {
 
     return orderList;
   }
+
+  @override
+  void sortOrderList(List<OrderModel> orderList) {
+    orderList.sort((a, b) => b.registrationDate.compareTo(a.registrationDate));
+  }
 }
