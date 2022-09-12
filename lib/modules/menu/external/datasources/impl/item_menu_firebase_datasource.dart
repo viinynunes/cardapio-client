@@ -11,6 +11,7 @@ class ItemMenuFirebaseDatasource implements IItemMenuDatasource {
     List<ItemMenuModel> menuList = [];
 
     final result = await _menuCollection
+        .where('enabled', isEqualTo: true)
         .where('weekdayList', arrayContains: weekday.weekday)
         .get();
 
