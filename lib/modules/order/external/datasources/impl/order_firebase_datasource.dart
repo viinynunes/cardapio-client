@@ -10,7 +10,8 @@ import '../../../../menu/infra/models/item_menu_model.dart';
 
 class OrderFirebaseDatasource implements IOrderDatasource {
   final ILoggedUserDatasource _loggedUserDatasource;
-  final _orderCollection = FirebaseFirestore.instance.collection('users');
+  final _userOrderCollection = FirebaseFirestore.instance.collection('users');
+  final _orderCollection = FirebaseFirestore.instance.collection('orders');
 
   OrderFirebaseDatasource(this._loggedUserDatasource);
 
@@ -18,26 +19,29 @@ class OrderFirebaseDatasource implements IOrderDatasource {
   Future<OrderModel> create(OrderModel order) async {
     try {
       final user = UserModel.fromUser(user: order.user).toMap();
-      final result = await _orderCollection
+      final result = await _userOrderCollection
           .doc(order.user.id)
           .collection('orders')
           .add(order.toMap(user: user))
           .catchError((e) => throw OrderError(e.toString()));
 
       order.id = result.id;
-      await _orderCollection
+      await _userOrderCollection
           .doc(order.user.id)
           .collection('orders')
           .doc(result.id)
           .update(order.toMap(user: user))
           .catchError((e) => throw OrderError(e.toString()));
 
+      await _orderCollection
+          .doc(order.id)
+          .set(order.toMap(user: user))
+          .catchError((e) => throw OrderError(e.toString()));
+
       return order;
     } on OrderError catch (e) {
-      print(e.message);
+      throw OrderError(e.message);
     }
-
-    return order;
   }
 
   @override
@@ -46,11 +50,13 @@ class OrderFirebaseDatasource implements IOrderDatasource {
 
     final user = UserModel.fromUser(user: order.user).toMap();
 
-    _orderCollection
+    _userOrderCollection
         .doc(order.user.id)
         .collection('orders')
         .doc(order.id)
         .update(order.toMap(user: user));
+
+    _orderCollection.doc(order.id).update(order.toMap(user: user));
 
     return order;
   }
@@ -60,7 +66,8 @@ class OrderFirebaseDatasource implements IOrderDatasource {
     List<OrderModel> orderList = [];
     final user = await _loggedUserDatasource.getLoggedUser();
 
-    final snap = await _orderCollection.doc(user.id).collection('orders').get();
+    final snap =
+        await _userOrderCollection.doc(user.id).collection('orders').get();
 
     for (var e in snap.docs) {
       Timestamp timestamp = e.data()['registrationDate'];
