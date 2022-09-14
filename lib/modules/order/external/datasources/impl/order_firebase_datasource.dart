@@ -1,16 +1,17 @@
 import 'package:cardapio/modules/errors/errors.dart';
-import 'package:cardapio/modules/login/infra/datasources/i_logged_user_datasource.dart';
+import 'package:cardapio/modules/login/infra/datasources/i_logged_client_datasource.dart';
 import 'package:cardapio/modules/order/domain/entities/enums/order_status_enum.dart';
 import 'package:cardapio/modules/order/infra/datasources/i_order_datasource.dart';
 import 'package:cardapio/modules/order/infra/models/order_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../../../login/infra/models/user_model.dart';
+import '../../../../login/infra/models/client_model.dart';
 import '../../../../menu/infra/models/item_menu_model.dart';
 
 class OrderFirebaseDatasource implements IOrderDatasource {
-  final ILoggedUserDatasource _loggedUserDatasource;
-  final _userOrderCollection = FirebaseFirestore.instance.collection('users');
+  final ILoggedClientDatasource _loggedUserDatasource;
+  final _clientOrderCollection =
+      FirebaseFirestore.instance.collection('clients');
   final _orderCollection = FirebaseFirestore.instance.collection('orders');
 
   OrderFirebaseDatasource(this._loggedUserDatasource);
@@ -18,24 +19,24 @@ class OrderFirebaseDatasource implements IOrderDatasource {
   @override
   Future<OrderModel> create(OrderModel order) async {
     try {
-      final user = UserModel.fromUser(user: order.user).toMap();
-      final result = await _userOrderCollection
-          .doc(order.user.id)
+      final client = ClientModel.fromClient(user: order.client).toMap();
+      final result = await _clientOrderCollection
+          .doc(order.client.id)
           .collection('orders')
-          .add(order.toMap(user: user))
+          .add(order.toMap(client: client))
           .catchError((e) => throw OrderError(e.toString()));
 
       order.id = result.id;
-      await _userOrderCollection
-          .doc(order.user.id)
+      await _clientOrderCollection
+          .doc(order.client.id)
           .collection('orders')
           .doc(result.id)
-          .update(order.toMap(user: user))
+          .update(order.toMap(client: client))
           .catchError((e) => throw OrderError(e.toString()));
 
       await _orderCollection
           .doc(order.id)
-          .set(order.toMap(user: user))
+          .set(order.toMap(client: client))
           .catchError((e) => throw OrderError(e.toString()));
 
       return order;
@@ -48,15 +49,15 @@ class OrderFirebaseDatasource implements IOrderDatasource {
   Future<OrderModel> cancel(OrderModel order) async {
     order.status = OrderStatus.cancelled;
 
-    final user = UserModel.fromUser(user: order.user).toMap();
+    final client = ClientModel.fromClient(user: order.client).toMap();
 
-    _userOrderCollection
-        .doc(order.user.id)
+    _clientOrderCollection
+        .doc(order.client.id)
         .collection('orders')
         .doc(order.id)
-        .update(order.toMap(user: user));
+        .update(order.toMap(client: client));
 
-    _orderCollection.doc(order.id).update(order.toMap(user: user));
+    _orderCollection.doc(order.id).update(order.toMap(client: client));
 
     return order;
   }
@@ -64,10 +65,10 @@ class OrderFirebaseDatasource implements IOrderDatasource {
   @override
   Future<List<OrderModel>> getOrders() async {
     List<OrderModel> orderList = [];
-    final user = await _loggedUserDatasource.getLoggedUser();
+    final client = await _loggedUserDatasource.getLoggedClient();
 
     final snap =
-        await _userOrderCollection.doc(user.id).collection('orders').get();
+        await _clientOrderCollection.doc(client.id).collection('orders').get();
 
     for (var e in snap.docs) {
       Timestamp timestamp = e.data()['registrationDate'];

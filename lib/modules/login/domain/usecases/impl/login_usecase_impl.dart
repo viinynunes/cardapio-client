@@ -1,4 +1,4 @@
-import 'package:cardapio/modules/login/domain/entities/user.dart';
+import 'package:cardapio/modules/login/domain/entities/client.dart';
 import 'package:cardapio/modules/login/domain/repositories/i_login_repository.dart';
 import 'package:cardapio/modules/login/domain/usecases/i_login_usecase.dart';
 import 'package:dartz/dartz.dart';
@@ -12,7 +12,7 @@ class LoginUsecaseImpl implements ILoginUsecase {
   LoginUsecaseImpl(this._repository);
 
   @override
-  Future<Either<LoginError, User>> login(String email, String password) async {
+  Future<Either<LoginError, Client>> login(String email, String password) async {
     if (!isEmail(email)) {
       return Left(LoginError('Invalid email'));
     }

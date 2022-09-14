@@ -4,10 +4,10 @@ class LoginError implements Exception {
   LoginError(this.message);
 }
 
-class LoggedUserError implements Exception {
+class LoggedClientError implements Exception {
   final String message;
 
-  LoggedUserError(this.message);
+  LoggedClientError(this.message);
 }
 
 class DataSourceError extends LoginError {

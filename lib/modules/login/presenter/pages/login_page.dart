@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                               final email = _emailController.text;
                               final password = _passwordController.text;
 
-                              bloc.add(UserLoginEvent(email, password));
+                              bloc.add(ClientLoginEvent(email, password));
                             }
                           },
                           child: const Text('Entrar'),

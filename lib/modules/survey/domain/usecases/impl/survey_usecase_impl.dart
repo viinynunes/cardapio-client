@@ -22,7 +22,7 @@ class SurveyUsecaseImpl implements ISurveyUsecase {
     if (response.satisfaction < 0){
       return Left(SurveyErrors('Satisfaction cannot be less then 0'));
     }
-    if(response.user.id.isEmpty){
+    if(response.client.id.isEmpty){
       return Left(SurveyErrors('Error getting user'));
     }
 

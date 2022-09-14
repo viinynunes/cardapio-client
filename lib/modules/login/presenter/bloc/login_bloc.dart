@@ -7,7 +7,7 @@ class LoginBloc extends Bloc<LoginEvents, LoginStates> {
   final ILoginUsecase usecase;
 
   LoginBloc(this.usecase) : super(LoginIdleState()) {
-    on<UserLoginEvent>((event, emit) async {
+    on<ClientLoginEvent>((event, emit) async {
       emit(LoginLoadingState());
 
       final result = await usecase.login(event.email, event.password);
@@ -16,7 +16,7 @@ class LoginBloc extends Bloc<LoginEvents, LoginStates> {
           (l) => emit(LoginErrorState(l)), (r) => emit(LoginSuccessState(r)));
     });
 
-    on<UserLogoutEvent>((event, emit) async {
+    on<ClientLogoutEvent>((event, emit) async {
       emit(LoginLoadingState());
       final result = await usecase.logout();
 

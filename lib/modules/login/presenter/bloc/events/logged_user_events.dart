@@ -1,3 +1,3 @@
-abstract class LoggedUserEvents {}
+abstract class LoggedClientEvents {}
 
-class GetLoggedUserEvent implements LoggedUserEvents {}
+class GetLoggedClientEvent implements LoggedClientEvents {}

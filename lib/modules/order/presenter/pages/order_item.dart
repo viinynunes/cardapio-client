@@ -103,7 +103,7 @@ class _OrderItemState extends State<OrderItem> with TickerProviderStateMixin {
                     Flexible(
                       flex: 1,
                       fit: FlexFit.tight,
-                      child: Text(widget.order.user.name,
+                      child: Text(widget.order.client.name,
                           textAlign: TextAlign.center),
                     ),
                   ],

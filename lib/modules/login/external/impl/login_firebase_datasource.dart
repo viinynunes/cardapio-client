@@ -1,33 +1,33 @@
 import 'package:cardapio/modules/login/errors/login_errors.dart';
-import 'package:cardapio/modules/login/infra/datasources/i_logged_user_datasource.dart';
+import 'package:cardapio/modules/login/infra/datasources/i_logged_client_datasource.dart';
 import 'package:cardapio/modules/login/infra/datasources/i_login_datasource.dart';
-import 'package:cardapio/modules/login/infra/models/user_model.dart';
+import 'package:cardapio/modules/login/infra/models/client_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginFirebaseDatasource implements ILoginDatasource {
-  final ILoggedUserDatasource _loggedUserDatasource;
+  final ILoggedClientDatasource _loggedClientDatasource;
 
-  LoginFirebaseDatasource(this._loggedUserDatasource);
+  LoginFirebaseDatasource(this._loggedClientDatasource);
 
   final _auth = FirebaseAuth.instance;
 
   User? _firebaseUser;
-  Map<String, dynamic> _userData = {};
+  Map<String, dynamic> _clientData = {};
 
   @override
-  Future<UserModel> login(String email, String password) async {
+  Future<ClientModel> login(String email, String password) async {
     final signInResult = await _auth
         .signInWithEmailAndPassword(email: email, password: password)
-        .catchError((e) => throw LoginError('Incorrect email or password'));
+        .catchError((e) => throw LoginError('Email ou senha incorreta'));
     _firebaseUser = signInResult.user;
 
-    _userData = {};
+    _clientData = {};
 
     await _loadCurrentUser();
 
-    final user = await _loggedUserDatasource
-        .saveLoggedUser(UserModel.fromMap(_userData))
+    final user = await _loggedClientDatasource
+        .saveLoggedClient(ClientModel.fromMap(_clientData))
         .catchError((e) => throw LoginError('Erro ao salvar o usuário'));
 
     return user;
@@ -38,9 +38,9 @@ class LoginFirebaseDatasource implements ILoginDatasource {
     try {
       await _auth.signOut();
       _firebaseUser = null;
-      _userData = {};
+      _clientData = {};
 
-      return await _loggedUserDatasource.logout();
+      return await _loggedClientDatasource.logout();
     } catch (e) {
       throw LoginError(e.toString());
     }
@@ -50,14 +50,14 @@ class LoginFirebaseDatasource implements ILoginDatasource {
     _firebaseUser = _auth.currentUser;
 
     if (_firebaseUser != null) {
-      if (_userData['name'] == null) {
+      if (_clientData['name'] == null) {
         final docUser = await FirebaseFirestore.instance
-            .collection('users')
+            .collection('clients')
             .doc(_firebaseUser!.uid)
             .get();
 
-        _userData = docUser.data() as Map<String, dynamic>;
-        _userData['id'] = docUser.id;
+        _clientData = docUser.data() as Map<String, dynamic>;
+        _clientData['id'] = docUser.id;
       }
     }
   }

@@ -1,32 +1,32 @@
-import 'package:cardapio/modules/login/infra/datasources/i_logged_user_datasource.dart';
-import 'package:cardapio/modules/login/infra/models/user_model.dart';
+import 'package:cardapio/modules/login/infra/datasources/i_logged_client_datasource.dart';
+import 'package:cardapio/modules/login/infra/models/client_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginSharedPreferencesDatasource implements ILoggedUserDatasource {
+class LoginSharedPreferencesDatasource implements ILoggedClientDatasource {
   @override
-  Future<UserModel> getLoggedUser() async {
-    final userPref = await SharedPreferences.getInstance();
+  Future<ClientModel> getLoggedClient() async {
+    final clientPref = await SharedPreferences.getInstance();
 
-    return UserModel.fromJson(userPref.get('user') as String);
+    return ClientModel.fromJson(clientPref.get('client') as String);
   }
 
   @override
   Future<bool> logout() async {
-    final userPref = await SharedPreferences.getInstance();
+    final clientPref = await SharedPreferences.getInstance();
 
-    await userPref.remove('user');
+    await clientPref.remove('client');
 
     return true;
   }
 
   @override
-  Future<UserModel> saveLoggedUser(UserModel user) async {
-    final userPref = await SharedPreferences.getInstance();
+  Future<ClientModel> saveLoggedClient(ClientModel client) async {
+    final clientPref = await SharedPreferences.getInstance();
 
-    await userPref.setString('user', user.toJson());
+    await clientPref.setString('client', client.toJson());
 
-    final recUser = UserModel.fromJson(userPref.get('user') as String);
+    final recClient = ClientModel.fromJson(clientPref.get('client') as String);
 
-    return recUser;
+    return recClient;
   }
 }

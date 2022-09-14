@@ -1,9 +1,9 @@
 abstract class LoginEvents {}
 
-class UserLoginEvent implements LoginEvents {
+class ClientLoginEvent implements LoginEvents {
   String email, password;
 
-  UserLoginEvent(this.email, this.password);
+  ClientLoginEvent(this.email, this.password);
 }
 
-class UserLogoutEvent implements LoginEvents {}
+class ClientLogoutEvent implements LoginEvents {}

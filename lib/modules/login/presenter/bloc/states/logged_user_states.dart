@@ -1,20 +1,20 @@
-import 'package:cardapio/modules/login/domain/entities/user.dart';
+import 'package:cardapio/modules/login/domain/entities/client.dart';
 import 'package:cardapio/modules/login/errors/login_errors.dart';
 
-abstract class LoggedUserStates {}
+abstract class LoggedClientStates {}
 
-class LoggedUserIdleState implements LoggedUserStates {}
+class LoggedClientIdleState implements LoggedClientStates {}
 
-class LoggedUserLoadingState implements LoggedUserStates {}
+class LoggedClientLoadingState implements LoggedClientStates {}
 
-class LoggedUserSuccessState implements LoggedUserStates {
-  User user;
+class LoggedClientSuccessState implements LoggedClientStates {
+  Client user;
 
-  LoggedUserSuccessState(this.user);
+  LoggedClientSuccessState(this.user);
 }
 
-class LoggedUserErrorState implements LoggedUserStates {
-  final LoggedUserError error;
+class LoggedClientErrorState implements LoggedClientStates {
+  final LoggedClientError error;
 
-  LoggedUserErrorState(this.error);
+  LoggedClientErrorState(this.error);
 }

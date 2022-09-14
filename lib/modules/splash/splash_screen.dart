@@ -21,7 +21,7 @@ class _SplashScreenInitialState extends State<SplashScreenInitial> {
   Future<void> _routesByLoggedUser() async {
     final userPref = await SharedPreferences.getInstance();
 
-    final recUser = userPref.get('user');
+    final recUser = userPref.get('client');
 
     if (recUser == null) {
       Modular.to.navigate('/login/');

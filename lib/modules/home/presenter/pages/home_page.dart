@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../login/presenter/bloc/events/login_events.dart';
-import '../../../login/presenter/bloc/logged_user_bloc.dart';
+import '../../../login/presenter/bloc/logged_client_bloc.dart';
 import '../../../login/presenter/bloc/login_bloc.dart';
 import '../../../login/presenter/bloc/states/logged_user_states.dart';
 
@@ -19,13 +19,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final loginBloc = Modular.get<LoginBloc>();
-  final loggedUserBloc = Modular.get<LoggedUserBloc>();
+  final loggedUserBloc = Modular.get<LoggedClientBloc>();
 
   @override
   void initState() {
     super.initState();
 
-    loggedUserBloc.add(GetLoggedUserEvent());
+    loggedUserBloc.add(GetLoggedClientEvent());
   }
 
   @override
@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<LoginBloc>(create: (context) => loginBloc),
-        BlocProvider<LoggedUserBloc>(create: (context) => loggedUserBloc)
+        BlocProvider<LoggedClientBloc>(create: (context) => loggedUserBloc)
       ],
       child: Scaffold(
         appBar: AppBar(
@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
           ],
           leading: IconButton(
             onPressed: () {
-              loginBloc.add(UserLogoutEvent());
+              loginBloc.add(ClientLogoutEvent());
               Modular.to.pushReplacementNamed('/login/');
             },
             icon: const Icon(Icons.power_settings_new_outlined),
@@ -137,16 +137,16 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        bottomSheet: BlocBuilder<LoggedUserBloc, LoggedUserStates>(
+        bottomSheet: BlocBuilder<LoggedClientBloc, LoggedClientStates>(
           bloc: loggedUserBloc,
           builder: (_, state) {
-            if (state is LoggedUserLoadingState) {
+            if (state is LoggedClientLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
 
-            if (state is LoggedUserErrorState) {
+            if (state is LoggedClientErrorState) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
               );
             }
 
-            if (state is LoggedUserSuccessState) {
+            if (state is LoggedClientSuccessState) {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
