@@ -20,6 +20,10 @@ class OrderFirebaseDatasource implements IOrderDatasource {
   Future<OrderModel> create(OrderModel order) async {
     try {
       final client = ClientModel.fromClient(user: order.client).toMap();
+
+      order.registrationDate = DateTime(order.registrationDate.year,
+          order.registrationDate.month, order.registrationDate.day);
+
       final result = await _clientOrderCollection
           .doc(order.client.id)
           .collection('orders')
