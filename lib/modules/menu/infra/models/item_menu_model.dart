@@ -36,6 +36,7 @@ class ItemMenuModel extends ItemMenu {
       'description': description,
       'imgUrl': imgUrl,
       'weekdayList': weekdayList,
+      'enabled': true,
     };
   }
 
