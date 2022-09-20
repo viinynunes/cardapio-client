@@ -44,7 +44,8 @@ class CartTile extends StatelessWidget {
                       child: Text(
                         item.name,
                         textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 22),
+                        maxLines: 3,
+                        style: const TextStyle(fontSize: 19),
                       ),
                     ),
                     Flexible(
