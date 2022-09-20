@@ -24,6 +24,10 @@ class OrderFirebaseDatasource implements IOrderDatasource {
       order.registrationDate = DateTime(order.registrationDate.year,
           order.registrationDate.month, order.registrationDate.day);
 
+      final getOrderNumber = await _orderCollection.doc('orderNumber').get();
+
+      order.number = getOrderNumber.get('orderNumber') + 1;
+
       final result = await _clientOrderCollection
           .doc(order.client.id)
           .collection('orders')
@@ -42,6 +46,10 @@ class OrderFirebaseDatasource implements IOrderDatasource {
           .doc(order.id)
           .set(order.toMap(client: client))
           .catchError((e) => throw OrderError(e.toString()));
+
+      await _orderCollection
+          .doc('orderNumber')
+          .update({'orderNumber': order.number});
 
       return order;
     } on OrderError catch (e) {

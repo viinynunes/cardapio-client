@@ -42,6 +42,7 @@ class OrderBloc extends Bloc<OrderEvents, OrderStates> {
       if (client != null && menuList.isNotEmpty) {
         final order = Order(
             id: '0',
+            number: 1,
             client: client!,
             menuList: menuList,
             registrationDate: DateTime.now(),
