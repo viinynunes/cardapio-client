@@ -50,7 +50,7 @@ class _OrderItemState extends State<OrderItem> with TickerProviderStateMixin {
     final dateFormat = DateFormat('dd/MM/yyyy');
     bool eventPressed = false;
 
-    Widget _getDecoratedContainer(
+    Widget getDecoratedContainer(
         {double? height,
         required int flex,
         required bool withBackground,
@@ -86,9 +86,9 @@ class _OrderItemState extends State<OrderItem> with TickerProviderStateMixin {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _getDecoratedContainer(
+              getDecoratedContainer(
                 height: 0.07,
-                flex: 1,
+                flex: 2,
                 withBackground: true,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -109,7 +109,7 @@ class _OrderItemState extends State<OrderItem> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-              _getDecoratedContainer(
+              getDecoratedContainer(
                 height: 0.07,
                 withBackground: true,
                 flex: 2,
@@ -158,7 +158,7 @@ class _OrderItemState extends State<OrderItem> with TickerProviderStateMixin {
                   ],
                 ),
               ),
-              _getDecoratedContainer(
+              getDecoratedContainer(
                 flex: 10,
                 withBackground: false,
                 child: Column(
@@ -189,7 +189,7 @@ class _OrderItemState extends State<OrderItem> with TickerProviderStateMixin {
                   }
 
                   return widget.order.status == OrderStatus.open
-                      ? _getDecoratedContainer(
+                      ? getDecoratedContainer(
                           height: size.height * 0.07,
                           withBackground: true,
                           flex: 2,
@@ -221,7 +221,7 @@ class _OrderItemState extends State<OrderItem> with TickerProviderStateMixin {
                   if (state is OrderSuccessState) {
                     orderCancelConfirmedAniController.forward();
 
-                    return _getDecoratedContainer(
+                    return getDecoratedContainer(
                       height: 0.2,
                       flex: 1,
                       withBackground: true,
