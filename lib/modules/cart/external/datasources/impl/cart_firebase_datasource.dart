@@ -18,18 +18,7 @@ class CartFirebaseDatasource implements ICartDatasource {
   Future<ItemMenuModel> addItemToCart(ItemMenuModel item) async {
     final client = await _getLoggedUser();
 
-    _userCollection
-        .doc(client.id)
-        .collection('cart')
-        .add(item.toMap())
-        .then((value) {
-      item.id = value.id;
-      _userCollection
-          .doc(client.id)
-          .collection('cart')
-          .doc(value.id)
-          .update(item.toMap());
-    });
+    _userCollection.doc(client.id).collection('cart').doc(item.id).set(item.toMap());
 
     return item;
   }
@@ -38,7 +27,11 @@ class CartFirebaseDatasource implements ICartDatasource {
   Future<bool> removeItemFromCart(ItemMenuModel item) async {
     final client = await _getLoggedUser();
 
-    await _userCollection.doc(client.id).collection('cart').doc(item.id).delete();
+    await _userCollection
+        .doc(client.id)
+        .collection('cart')
+        .doc(item.id)
+        .delete();
 
     return true;
   }
@@ -63,7 +56,8 @@ class CartFirebaseDatasource implements ICartDatasource {
 
     final client = await _getLoggedUser();
 
-    final result = await _userCollection.doc(client.id).collection('cart').get();
+    final result =
+        await _userCollection.doc(client.id).collection('cart').get();
 
     for (var e in result.docs) {
       cartList.add(ItemMenuModel.fromMap(map: e.data()));
