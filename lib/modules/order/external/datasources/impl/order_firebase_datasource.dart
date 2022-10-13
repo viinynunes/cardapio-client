@@ -88,7 +88,11 @@ class OrderFirebaseDatasource implements IOrderDatasource {
 
       List<ItemMenuModel> menuList = [];
       for (var e in e.data()['menuList']) {
-        menuList.add(ItemMenuModel.fromMap(map: e));
+        final menu = await FirebaseFirestore.instance
+            .collection('menu')
+            .where('id', isEqualTo: e['id'])
+            .get();
+        menuList.add(ItemMenuModel.fromMap(map: menu.docs.first.data()));
       }
       orderList.add(OrderModel.fromMap(
           map: e.data(),
