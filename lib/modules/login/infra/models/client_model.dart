@@ -9,9 +9,9 @@ class ClientModel extends Client {
       required super.email,
       required super.phone});
 
-  ClientModel.fromClient({required Client user})
+  ClientModel.fromClient({required Client client})
       : super(
-            id: user.id, name: user.name, email: user.email, phone: user.phone);
+            id: client.id, name: client.name, email: client.email, phone: client.phone);
 
   static ClientModel fromMap(Map<String, dynamic> map) {
     return ClientModel(

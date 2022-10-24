@@ -25,7 +25,7 @@ class OrderModel extends Order {
       : super(
           id: order.id,
           number: order.number,
-          client: ClientModel.fromClient(user: order.client),
+          client: ClientModel.fromClient(client: order.client),
           registrationDate: order.registrationDate,
           status: order.status,
           menuList: order.menuList,

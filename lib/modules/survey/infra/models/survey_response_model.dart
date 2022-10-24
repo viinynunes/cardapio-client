@@ -31,7 +31,7 @@ class SurveyResponseModel extends SurveyResponse {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'client': ClientModel.fromClient(user: client).toMap(),
+      'client': ClientModel.fromClient(client: client).toMap(),
       'satisfaction': satisfaction,
       'description': description,
       'survey': SurveyModel.fromSurvey(survey).toMap(),

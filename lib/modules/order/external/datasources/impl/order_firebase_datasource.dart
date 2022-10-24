@@ -19,7 +19,7 @@ class OrderFirebaseDatasource implements IOrderDatasource {
   @override
   Future<OrderModel> create(OrderModel order) async {
     try {
-      final client = ClientModel.fromClient(user: order.client).toMap();
+      final client = ClientModel.fromClient(client: order.client).toMap();
 
       order.registrationDate = DateTime(order.registrationDate.year,
           order.registrationDate.month, order.registrationDate.day);
@@ -61,7 +61,7 @@ class OrderFirebaseDatasource implements IOrderDatasource {
   Future<OrderModel> cancel(OrderModel order) async {
     order.status = OrderStatus.cancelled;
 
-    final client = ClientModel.fromClient(user: order.client).toMap();
+    final client = ClientModel.fromClient(client: order.client).toMap();
 
     _clientOrderCollection
         .doc(order.client.id)
