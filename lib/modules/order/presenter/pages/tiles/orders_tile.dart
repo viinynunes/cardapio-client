@@ -27,7 +27,7 @@ class OrdersTile extends StatelessWidget {
           child: Row(
             children: [
               Flexible(
-                flex: 1,
+                flex: 2,
                 fit: FlexFit.tight,
                 child: Text(
                   dateFormat.format(order.registrationDate),
@@ -35,7 +35,7 @@ class OrdersTile extends StatelessWidget {
                 ),
               ),
               Flexible(
-                flex: 3,
+                flex: 5,
                 fit: FlexFit.tight,
                 child: Text(
                   order.menuList.first.name,
@@ -43,7 +43,7 @@ class OrdersTile extends StatelessWidget {
                 ),
               ),
               Flexible(
-                flex: 1,
+                flex: 2,
                 fit: FlexFit.tight,
                 child: Text(
                   order.status.name,
