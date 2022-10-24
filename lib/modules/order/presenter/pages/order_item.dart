@@ -71,7 +71,7 @@ class _OrderItemState extends State<OrderItem> with TickerProviderStateMixin {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pedido ${widget.order.id}'),
+        title: Text('Pedido ${widget.order.number.toString()}'),
         centerTitle: true,
       ),
       body: WillPopScope(
