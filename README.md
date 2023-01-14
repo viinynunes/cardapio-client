@@ -1,16 +1,24 @@
-# cardapio
+<h1 align="center">Cardápio - App Cliente</h1>
 
-Project to manage kitchen orders
+<p align="center">Aplicativo utilizado por clientes de uma empresa para realizar os pedidos de suas refeições na cozinha local. No app, podemos escolher o prato disponivel para o dia e realizar o pedido.</p>
 
-## Getting Started
+### 🛠 Tecnologias
 
-This project is a starting point for a Flutter application.
+As seguintes ferramentas foram usadas na construção do projeto:
 
-A few resources to get you started if this is your first Flutter project:
+- [Dart](https://dart.dev/)
+- [Flutter](https://flutter.dev/)
+- [BloC](https://pub.dev/packages/flutter_bloc)
+- [Flutter Modular](https://pub.dev/packages/flutter_modular)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<h4 align="center"> 
+	🚧  Versão 1.0 Finalizada  🚧
+</h4>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Features já implementadas
+- Login de usuário préviamente cadastrado pela empresa
+- Seleção do cardápio de acordo com o dia da semana.
+- Carrinho com os itens do pedido.
+- Acompanhamento do status do pedido.
+- Visualização do histórico de pedidos.
+- Avaliação geral por pesquisas enviadas pela empresa.
